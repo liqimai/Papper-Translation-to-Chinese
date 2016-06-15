@@ -1,8 +1,9 @@
 %hello_world.tex
 \documentclass[twocolumn]{article}
 \usepackage{amsmath,amssymb}
-\usepackage[amsmath,thref,thmmarks]{ntheorem}%ntheorem宏包与amsmath有冲突，一起使用要加上amsmath选项
-           %使用定理环境的交叉引用，要加上thref选项；使用证明结束符，要加上thmmarks选项（？）
+\usepackage[amsmath,thref,thmmarks]{ntheorem}
+%ntheorem宏包与amsmath有冲突，一起使用要加上amsmath选项
+%使用定理环境的交叉引用，要加上thref选项；使用证明结束符，要加上thmmarks选项（？）
 \usepackage{graphicx}
 \usepackage{subfigure}
 \usepackage{CJKutf8}
@@ -222,31 +223,31 @@ bottom=3cm}
 
     集合$\mathcal{NP}$非常庞大。不严格的讲，一个判定问题属于$\mathcal{NP}$当且仅当它可以被回溯搜索在多项式深度内解决。有很多重要的计算问题现在还无法证明属于$\mathcal{P}$，但是它们都明显属于$\mathcal{NP}$。比如着色问题————判断一个图中的节点被$k$种颜色着色后，是否能够使得相邻的节点都具有不同的颜色。一个非确定性的算法可以简单的猜一个颜色分配，然后在多项式时间内验证是否所有的相邻节点都有不同的颜色。
 
-    考虑到$\mathcal{NP}$的范围如此之大，下面这个Cook提出的定理就非常有意义了。我们定义可满足性问题（SAT）如下：\\
-    {\bf可满足问题（SAT）}\\
+    考虑到$\mathcal{NP}$的范围如此之大，下面这个Cook提出的定理就非常有意义了。我们定义可满足性问题（简称SAT）如下：\\
+    {\bf可满足性问题（SATISFIABILITY）}\\
     输入：语句（Clause） $C_1,C_2,\cdots,C_p$\\
     性质：给定语句的合取是可满足的；即存在集合$S\subseteq\{x_1,x_2,\cdots,x_n,\bar{x_1},\bar{x_2},\cdots,\bar{x_n}\}$同时满足：\\
     \indent a) S不存在互补的文字（literal）\\
     \indent b) $S\cap C_K\neg\Phi,k=1,2,\cdots,P$。
-    
+
     \begin{theorem}[Cook]
         如果$L\in\mathcal{NP}$，那么$L\propto SAT$
     \end{theorem}
-    
+
     Cook(1971)陈述该定理时，用的是一种并不能明确体现规约的记号，但是现在的这种陈述方式是建立在他的证明之上的。
-    
+
     \begin{corollary}
         $P=\mathcal{NP} \Leftrightarrow SAT \in \mathcal{P}$
     \end{corollary}
-    
+
     \begin{proof}
       如果$SAT\in\mathcal{P}$，那么对于所有的$L\in\mathcal{NP},L\in\mathcal{P}$，因为$L \propto SAT$。如果$SAT\not\in\mathcal{P}$，因为$SAT\in\mathcal{NP}$，那么$\mathcal{P}\neq\mathcal{NP}$。
     \end{proof}
-    
+
     {\bf注意}，如果$\mathcal{P}=\mathcal{NP}$，那么$\mathcal{NP}$关于补运算和polynomial-pounded existential quantification是封闭的。因此它关于polynomial-bounded universal quantification也是封闭的。接下来，polynomial-bounded analogue of Kleene's Arithmetic Hierarchy[Rogers(1967)]就变得平凡了，如果$\mathcal{P}=\mathcal{NP}$。
-    
+
     定理2表明，如果存在一个多项式时间算法可以判定$SAT$问题，那么所有可以被多项式深度回溯搜索解决的问题都可以被多项式时间算法解决。这是对$SAT\not\in\mathcal{P}$的强烈暗示。
-    
+
 \section{完全问题}
     这篇论文的主要目标是找到一批和$SAT$问题有着相同地位的计算问题。这些问题可以被称为完全。
     \begin{definition}
@@ -254,30 +255,30 @@ bottom=3cm}
         \indent a) $L\in\mathcal{NP}$\\
         \indent b) $SAT\propto L$\\
     \end{definition}
-    
+
     \begin{theorem}
         要么所有的完全语言都属于$\mathcal{P}$，要么都不是。当且仅当$\mathcal{P}=\mathcal{NP}$时，前一种可能为真。
     \end{theorem}
-    
+
     我们可以把完全的概念从定义在$\Sigma^*$上的语言扩展到定义在可数集上的问题。
     
     \begin{definition}
         $D$是一个可数集，$e$是一个“标准”的一对一编码函数$e:D\rightarrow\Sigma^*$且$T$是$D$的一个子集。那么$T$是{\bf完全}的，当且仅当$e(T)$是完全的\footnote{此处原文为$e(D)$，应是笔误}。
     \end{definition}
-    
+
     \begin{lemma}
         用$D$和$D'$表示可数集，且有一对一编码函数$e$和$e'$。他们分别有子集$T\subset D$和$T'\subset D'$。如果存在函数$F:D\rightarrow D'$同时满足以下条件，则称$T\propto T'$。\\
         \indent a) $F(x)\in T' \Leftrightarrow x\in T$\\
         \indent b) 存在一个函数 $f\in\Pi$，使得 $f(x)=e'(F(e^{-1}(x)))$，只要$e'(F(e^{-1}(x)))$是有定义的。\\
     \end{lemma}
-    
+
     本文的剩余部分主要进行了下面这个定理的证明。
-    
+
     {\bf主要定理}，以下列出的所有问题都是完全的。
 
     \begin{enumerate}
     \item {\bf可满足性问题(SATISFIABILITY)}\\
-    注释： 默认的，这个问题等价于判定一个析取范式是否是一个永真式。
+    注： 默认的，这个问题等价于判定一个析取范式是否是一个永真式。
 
     \item {\bf0-1整数规划问题\\(0-1 INTEGER PROGRAMMING)}\\
     输入：整数矩阵$C$和整数向量$d$\\
@@ -292,7 +293,7 @@ bottom=3cm}
     性质：$\{S_j\}$包含$\ell$个互斥集合。
 
     \item {\bf顶点覆盖(NODE COVER)}\\
-    输入：图$G$，正整数$\ell$\\
+    输入：图$G'$，正整数$\ell$\\
     性质：存在集合$R\subset N'$，使得$|R|\leq\ell$且每一条边都与$R$中的某个顶点相邻。
 
     \item {\bf集合覆盖(SET COVERING)}\\
@@ -315,7 +316,7 @@ bottom=3cm}
     输入：图$G$\\
     性质：$G$存在一个环，经过图中每个节点恰好一次。
 
-    \item {\bf每个语句最多有3个文字的可满足性问题\\(SATISFIABILITY WITH AT MOST 3 LITERALS PER CLAUSE)}\\
+    \item {\bf3-可满足性问题\\(SATISFIABILITY WITH AT MOST 3 LITERALS PER CLAUSE)}\\
     输入：语句 $D_1,D_2,\cdots,D_r$，每个都最多包含3个文字(Literal)。\\
     性质：集合$\{D_1,D_2,\cdots,D_r\}$是可满足的
 
@@ -331,15 +332,260 @@ bottom=3cm}
     输入：集合$\{u_i,i=1,2,\cdots,t\}$的子集组成的族${S_j}$\\
     性质：存在一个子族$\{T_h\}\subset\{S_j\}$，使得$T_h$两两互斥，且$\bigcup T_h=\bigcup S_j=\{u_i,i=1,2,\cdots,t\}$。
 
-    \item {\bf}\\
-    输入：\\
-    性质：
+    \item {\bf碰集(HITTING SET)}\\
+    输入：集合$\{s_j,j=1,2,\cdots,t\}$的子集组成的族${U_i}$\\
+    性质：存在一个集合$W$，使得对于所有$i$，$|W\cap U_i|=1$
 
-    \item {\bf}\\
-    输入：\\
-    性质：
+    \item {\bf斯坦纳树(STEINER TREE)}\\
+    输入：图$G$，$R\subset N$，权重函数$w:A\rightarrow Z$，正整数$k$\\
+    性质：G有一个权重小于等于$k$的子树，包含所有$R$中的节点
+
+    \item {\bf三维匹配(3-DIMENSIONAL MATCHING)}\\
+    输入：集合$U\subset T\times T\times T$，其中$T$是一个有限集\\
+    性质：存在一个集合$W\subset U$，使得$|W|=|T|$，且$W$中任意两个元素在任意一个维度上的值都不相同。
+
+    \item {\bf背包(KNAPSACK)}\\
+    输入：$(a_1,a_2,\cdots,a_r,b)\in Z^{n+1}$(\\
+    性质：$\sum a_j x_j=b$有0-1解
+
+    \item {\bf工作排序(JOB SEQUENCING)}\\
+    输入：“执行时间向量” $(T_1,\cdots,T_p)\in Z^p$\\
+    \hphantom{输入：}“结束期限向量” $(D_1,\cdots,D_p)\in Z^p$\\
+    \hphantom{输入：}“惩罚向量” $(P_1,\cdots,P_p)\in Z^p$\\
+    \hphantom{输入：}正整数$k$\\
+    性质：存在一个$\{1,2,\cdots,p\}$的排列$\Pi$使得:
+    \begin{equation}\nonumber
+        \begin{aligned}
+            \sum_{j=1}^{p} [ \ {\tt if}\  T_{\Pi(1)}+\cdots+&T_{\Pi(j)} > D_{\Pi(j)} \\
+                            & {\tt then} \  P_{\Pi(j)}\ {\tt else}\  0 \  ] \leq k
+        \end{aligned}
+    \end{equation}
+
+    \item {\bf集合划分(PARTITION)}\\
+    输入：$(c_1,c_2,\cdots,c_s)\in Z^s$\\
+    性质：存在一个集合$I\subset\{1,2,\cdots,s\}$使得：
+    $$\sum_{h\in I}c_h = \sum_{h\notin I}c_h$$
+
+    \item {\bf最大割}\\
+    输入：图$G$，权重函数$w:A\rightarrow Z$，正整数$W$\\
+    性质：存在一个集合$S\subset N$，使得：
+    $$\sum_{\substack{\{u,v\}\in A \\ u\in S \\ v\notin S}} w(\{u,v\})\ge W$$
 
     \end{enumerate}
+
+    \begin{figure*}
+        \centering
+        \includegraphics[width=12cm]{complete_problems.png}
+        \caption{完全问题}
+    \end{figure*}
+
+    很明显，这些问题（更准确的说是他们在$\Sigma^*$中的编码）都属于$\mathcal{NP}$。我接下来将构造一系列的规约，证明$SAT$问题是可以规约到上面列出的每一个问题。图-1显示了这一系列的规约的过程。图中每一条线都代表一个从位置靠上的问题到位置靠下的问题的规约。
+
+    为了展示从集合$T\subset D$到集合$T'\subset D'$的规约。我们需要找到满足引理2的函数$F:D\rightarrow D'$。对于接下来我们给出的每个规约，读者可以很容的验证他们满足那些条件。
+    \begin{itemize}
+    \item 可满足性问题（SAT）$\propto$ 0-1整数规划
+        \begin{equation}\nonumber % Remove numbering (before each equation)
+        \begin{aligned}
+            &c_{ij}=\left\{
+            \begin{matrix}
+              1 & \text{如果}x_j\in C_i \\
+              -1 & \text{如果}\bar{x_j}\in C_i \\
+              0 & \text{其它}
+            \end{matrix}
+            \right.
+            \qquad
+            \begin{matrix}
+              i=1,2,\cdots,p\\
+              j=1,2,\cdots,n
+            \end{matrix}
+            \\
+            &b_i=1-(C_i\text{中取补的变量个数})
+        \end{aligned}
+        \end{equation}
+        
+    \item 可满足性问题 $\propto$ 分团问题
+        \begin{equation}\nonumber % Remove numbering (before each equation)
+        \begin{aligned}
+        & N = \{<\sigma,i>|\sigma\text{是}C_i\text{中出现的文字(Literal)}\} \\
+        & A = \{\{<\sigma,i>,<\delta,j>\}|i\neq j\text{且}\sigma\neq\bar{\delta}\} \\
+        & k = p\text{，分团数}
+        \end{aligned}
+        \end{equation}
+
+    \item 分团问题 $\propto$ SET PACKING
+        假设$N=\{1,2,\cdots,n\}$。集合$S_1,S_2,\cdots,S_n$中的元素是那些不在$A$中的节点二元集$\{i,j\}$。
+        \begin{equation}\nonumber % Remove numbering (before each equation)
+        \begin{aligned}
+        & S_i=\{\{i,j\}|\{i,j\}\notin A\},\ i=1,2,\cdots,n\\
+        & \ell=k
+        \end{aligned}
+        \end{equation}
+
+    \item 分团问题 $\propto$ 顶点覆盖
+        \begin{equation}\nonumber % Remove numbering (before each equation)
+        \begin{aligned}
+        & G' \text{是}G\text{补图}\\
+        & \ell=|N|-k
+        \end{aligned}
+        \end{equation}
+
+    \item 顶点覆盖 $\propto$ 集合覆盖\\
+    
+        假设$N'=\{1,2,\cdots,n\}$。则（集合覆盖问题中的集合的）元素为$G'$中的边。$S_j$是节点$j$的临边组成的集合。最后，$k=\ell$。
+
+    \item 顶点覆盖 $\propto$ 反馈顶点集
+        \begin{equation}\nonumber % Remove numbering (before each equation)
+        \begin{aligned}
+        & V=N'
+        & E=\{<u,v>|\{u,v\}\in A'\}
+        & k=\ell
+        \end{aligned}
+        \end{equation}
+
+    \item 顶点覆盖 $\propto$ 反馈边集
+        \begin{equation}\nonumber % Remove numbering (before each equation)
+        \begin{aligned}
+        V=&N'\times\{0,1\}\\
+        E=&\{<<u,0>,<u,1>>|u\in N'\}\\
+          &\cup\{<<u,1>,<v,0>>|\{u,v\}\in A'\}\\
+        k=&\ell
+        \end{aligned}
+        \end{equation}
+
+    \item 顶点覆盖 $\propto$ 有向汉密尔顿回路\\
+        不失一般性的，我们假设$A'=Z_m$。
+        \begin{equation}\nonumber % Remove numbering (before each equation)
+        \begin{aligned}
+        V=  &\{a_1,a_2,\cdots,a_\ell\}\\
+            &\cup\{<u,i,\alpha>|u\in N'\text{与}i\in A'\text{连接，且}\alpha\in \{0,1\}\}\\
+        E=  &\{<<u,i,0>,<u,i,1>>|<u,i,0>\in V\}\\
+            &\cup\{<<u,i,\alpha>,<v,i,\alpha>>|i\in A',\\
+                &\hphantom{\cup\{<<u,i,\alpha>,}\text{u和v与i连接，且}\alpha\in \{0,1\}\}\\
+            &\cup\{<<u,i,1>,<u,j,0>>|u\text{和}i,j\text{连接},\\
+                &\hphantom{\cup\{<<u,i,}\text{且不存在h，同时满足}i<h<j\text{和u与h相邻}\}\\
+            &\cup\{<<u,i,1>,a_f>|1\leq f\leq\ell, \\
+                &\hphantom{\cup\{<<u,i,}\text{且不存在}h > i,\text{使得u与h连接}\}\\
+            &\cup\{<a_f,<u,i,0>>|1\leq f\leq\ell, \\
+                &\hphantom{\cup\{<<u,i,}\text{且不存在}h < i,\text{使得u与h连接}\}\\
+        \end{aligned}
+        \end{equation}
+
+    \item 有向汉密尔顿回路 $\propto$ 无向汉密尔顿回路
+        \begin{equation}\nonumber % Remove numbering (before each equation)
+        \begin{aligned}
+        N=  &V\times{0,1,2}\\
+        A=  &\{\{<u,0>,<u,1>\},\{<u,1>,<u,2>\}|u\in V\}\\
+            &\cup\{\{<u,2>,<v,0>\}|<u,v>\in E\}
+        \end{aligned}
+        \end{equation}
+
+    \item 可满足性问题 $\propto$ 3-可满足性问题\\
+        把每个满足$\sigma_i$是文字且$m>3$的语句$\sigma_1\cup\sigma_2\cup\cdots\cup\sigma_m$替换为：
+        $$(\sigma_1\cup\sigma_2\cup u_1) (\sigma3\cup\cdots\cup\sigma_m\cup\bar{u}_1)
+        (\bar{\sigma}_3\cup u_1) \cdots(\bar{\sigma}_m\cup u_1)$$
+        其中$u_1$是一个新的变量。重复这个变换直到没有语句有多于三个的文字。
+
+    \item 3-可满足性问题 $\propto$ 色数\\
+        不失一般性的，我们假设$m>4$。
+        \begin{equation}\nonumber % Remove numbering (before each equation)
+        \begin{aligned}
+        N=  &\{u_1,u_2,\cdots,u_m\}\cup
+                \{\bar{u}_1,\bar{u}_2,\cdots,\bar{u}_m\}\cup\\
+            &\{v_1,v_2,\cdots,v_m\}\cup
+                \{D_1,D_2,\cdots,D_r\}\\
+        A=  &\{\{u_i,\bar{u}_i\}|i=1,2,\cdots,n\}\cup\{\{v_i,v_j\}|i\neq j\}\cup\\
+            &\{\{v_i,x_j\}|i\neq j\}\cup\{\{v_i,\bar{x}_j\}|i\neq j\}\cup\\
+            &\{\{u_i,D_f\}|u_i\notin D_f\}\cup\{\{\bar{u}_i,D_f\}|\bar{u}_i\notin D_f\}\\
+        k=&r+1
+        \end{aligned}
+        \end{equation}
+
+    \item 色数 $\propto$ 分团覆盖
+        \begin{equation}\nonumber % Remove numbering (before each equation)
+        \begin{aligned}
+        & G'\text{是}G\text{的补图}\\
+        & \ell=k
+        \end{aligned}
+        \end{equation}
+
+    \item 色数 $\propto$ 精确覆盖\\
+        精确覆盖问题中的集合为
+        $$N\cup A\cup\{<u,e,f>|u\text{与}e\text{连接且}1\leq f \leq k\}$$
+        族$\{S_j\}$构造如下：\\
+        对满足$1\leq f \leq k$的所有f,和所有$u\in N$，\\
+        $$\{u\}\cup\{<u,e,f>|e\text{与}u\text{连接}\}\in\{S_j\}$$\\
+        对于所有$e\in A$和所有满足$1\leq f_1 \leq k,1\leq f_2 \leq k,f_1\neq f_2$的$f_1,f_2$
+        \begin{equation}\nonumber % Remove numbering (before each equation)
+        \begin{aligned}
+        &\{e\}\cup\{<u,e,f>,f\neq f_1\}\\
+        &\hphantom{\{e\}\cup\{<u,}\cup\{<v,e,g>,g\neq f_2\} \in\{S_j\}\\
+        &\text{其中}u\text{和}v\text{是和}e\text{连接的两个节点。}
+        \end{aligned}
+        \end{equation}
+        其余集合都不属于$\{S_j\}$。
+
+    \item 精确覆盖 $\propto$ 碰集\\
+        碰集有集合$U_i$和元素$s_j$，使得$s_j\in U_i\Leftrightarrow u_i\in S_j$。
+
+    \item 精确覆盖 $\propto$ 斯坦纳树
+        \begin{equation}\nonumber % Remove numbering (before each equation)
+        \begin{aligned}
+        &N=\{n_o\}\cup\{S_j\}\cup\{u_i\}\\
+        &R=\{n_o\}\cup\{u_i\}\\
+        &A=\{\{n_o,S_j\}\}\cup\{\{S_j,u_i\}|u_i\in S_j\}\\
+        &w(\{n_o,S_j\})=|S_j|\\
+        &w(\{S_j,u_i\})=0\\
+        &k=|\{u_i\}|
+        \end{aligned}
+        \end{equation}
+
+    \item 精确覆盖 $\propto$ 3维匹配\\
+        不失一般性的，我们假设$|S_j|>2$对于所有$j$。令$T=\{<i,j>|u_i\in S_j\}$。令$\alpha$是任意一个从$\{u_i\}$到$T$的一对一函数。令$\pi:T\rightarrow T$是一个置换，使得对每一个固定的j，$\{<i,j>|u_i\in S_j\}$是$\pi$的周期。
+        \begin{equation}\nonumber % Remove numbering (before each equation)
+        \begin{aligned}
+        U=&\{<\alpha(u_i),<i,j>,<i,j>>|<i,j>\in T\}\\
+          &\cup\{<\beta,\sigma,\pi(\sigma)>|\text{对所有}i,\beta\neq \alpha(u_i)\}
+        \end{aligned}
+        \end{equation}
+
+    \item 精确覆盖 $\propto$ 背包问题\\
+        令$d=|\{S_j\}|+1$。令$\epsilon_{ji}=
+        \left\{\begin{matrix}
+            1 & \text{如果}u_i\in S_j \\
+            0 & \text{如果}u_i\notin S_j 
+        \end{matrix}\right.$ 令$r=|\{S_j\}|$。
+        
+        \begin{equation}\nonumber % Remove numbering (before each equation)
+        \begin{aligned}
+        &a_j=\sum\epsilon_{ji}d^{i-1}\\
+        &b=\frac{d^t-1}{d-1}
+        \end{aligned}
+        \end{equation}
+
+    \item 背包问题 $\propto$ 工作排序
+        $$p=r, T_i=P_i=a_i, D_i=b.$$
+
+    \item 背包问题 $\propto$ 集合划分
+        \begin{equation}\nonumber % Remove numbering (before each equation)
+        \begin{aligned}
+        &s=r+2\\
+        &c_i=a_i,i=1,2,\cdots,r\\
+        &c_{r+1}=b+1\\
+        &c_{r+2}=(\sum_{i=1}^{r}a_i)+1-b\\
+        \end{aligned}
+        \end{equation}
+
+    \item 集合划分 $\propto$ 最大割
+        \begin{equation}\nonumber % Remove numbering (before each equation)
+        \begin{aligned}
+        &N=\{1,2,\cdots,s\}\\
+        &A=\{\{i,j\}|i\in N,j\in N,i\notin j\}\\
+        &w(\{i,j\})=c_i\cdot c_j\\
+        &W=\lceil \frac14\sum c_i^2\rceil
+        \end{aligned}
+        \end{equation}
+
+    \end{itemize}
 % \section{理论分析}
 %     \subsection{稀疏矩阵}
 %     稀疏矩阵采用二维链表的方式进行储存，可以高效的进行矩阵乘法，加快Gauss-Seidel方法和Conjugate Gradient方法的运算速度。二维链表结构如\figurename\ref{2DimensionLinkedList}所示。每个非零元素都储存为一个节点。节点中除了包含该节点的值、行号、列号以外，还存有两个指针，分别指向同一行的下一个节点和同一列的下一个节点。而所有的行的头指针和列的头指针则存在两个数组中。对于一个含有$m$个元素的规模为$n\times n$的稀疏矩阵，所需存储空间为$O(m+n)$。
