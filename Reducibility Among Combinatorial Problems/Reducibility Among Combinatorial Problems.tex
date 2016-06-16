@@ -12,6 +12,8 @@
 \renewcommand\figurename{图}
 \usepackage{geometry}
 \usepackage{indentfirst}
+\usepackage[titletoc]{appendix}
+\renewcommand\appendixname{附录}
 \geometry{
 left=3cm,
 right=3cm,
@@ -67,15 +69,16 @@ bottom=3cm}
 \maketitle
 
 \begin{CJK}{UTF8}{gbsn}
+\renewcommand\abstractname{摘要}
 \begin{abstract}
 无向图、有向图、整数、数列、有限集合的有限族、布尔表达式等可数集中元素的性质判定问题构成了计算问题中相当大的一部分。通过简单的编码将这些可数集映射到一个定义在有限字母表上的串集中，这些问题可以被转化为语言的判定问题，籍此我们可以讨论它们的计算复杂性。当一个解终止所需要的计算次数是它的输入长度的多项式或更低阶函数，则认为这个解对应的问题得到了满意的解决。本文展示了许多经典的转化、匹配、装箱、路由、分配问题都是等价的，即它们要么全都是多项式时间可解问题，要么全都不是。
 \end{abstract}
 
 \section{引言}
 
-    目前已知的所有用来计算图的色数，判定汉密尔顿回路存在性或者解0-1整数规划的方法的计算复杂度，在最坏的情况下，都随着其输入长度的指数函数。在本文中我们给出了一些定理，它们强烈的暗示这些问题永远都不会得到有效解决，但也只是暗示而已。
+    目前已知的所有用来计算图的色数，判定汉密尔顿回路存在性或者解0-1整数规划的方法的计算复杂度，在最坏的情况下，都是其输入长度的指数函数。在本文中我们给出了一些定理，它们强烈的暗示这些问题永远都不会得到有效解决，不过也只是暗示而已。
 
-    我们对于多项式算法的存在性具有特别的兴趣。我们展示了一部分著名的组合问题，包括上文中提到的那些，它们是等价的，即任何一个问题存在多项式时间算法都可推出其它问题存在多项式时间算法。我们也证明了，如果这些问题存在多项式时间算法，一个出乎意料大的问题集合内的问题（简单的讲，所有通过回溯算法在多项式深度内可解的问题）都存在多项式时间算法。
+    对于多项式时间算法的存在性我们具有特别的兴趣。我们证明了一部分著名的组合问题，包括上文中提到的那些，它们都是等价的，即任何一个问题存在多项式时间算法都可推出其它问题存在多项式时间算法。我们也证明了，如果这些问题存在多项式时间算法，一个出乎意料大的问题集合内的问题（简单的讲，所有通过回溯算法在多项式深度内可解的问题）都存在多项式时间算法。
 
     接下来是对本文内容的简短总结。明确的讲，我们所做的工作都是围绕着单带图灵机的语言判定问题来进行的，但是对于其它的抽象计算模型也有同样的理论。将所有0、1有限串组成的集合记为$\Sigma^*$。$\Sigma^*$的子集称为{\bf语言}。$\mathcal{P}$代表所有单带确定性图灵机上多项式时间内可判定的语言组成的集合。$\mathcal{NP}$代表所有单带非确定性图灵机上多项式时间内可判定的语言组成的集合。$\Pi$代表所有$\Sigma^*\to\Sigma^*$的单带确定性图灵机上多项式时间内可计算的函数。$L$和$M$各代表一个语言。如果存在一个函数$f\in\Pi$，使得($f(x)\in M)\Leftrightarrow(x\in L)$，则称$L${\bf 可归约到}$M$，记为$L\propto M$。如果$M\in\mathcal{P}$且$L\propto M$，则$L\in\mathcal{P}$。如果$L\propto M$且$M\propto L$则称$L$和$M$等价。如果$L\in\mathcal{NP}$且$\mathcal{NP}$中所有的语言都可以规约到$L$，则称$L$是（{\bf多项式}）{\bf完全}的。要么所有的完全语言都属于$\mathcal{P}$，要么都不是。当且仅当$\mathcal{P} = \mathcal{NP}$时，所有的完全语言都属于$\mathcal{P}$。
 
@@ -84,7 +87,7 @@ bottom=3cm}
     本文受到了Stephen Cook(1971)工作的启发，并且建立在他论文中介绍的一个重要定理之上。笔者同时也对 Eugene Lawler 和 Robert Tarjan 的潜在贡献表达感谢。
 
 \section{$\mathcal{P}$类语言}
-    无向图、有向图、整数、数列、有限集合的有限族、布尔表达式等可数集中元素的性质判定问题构成了计算问题中相当大的一部分。当且仅当存在一个算法，算法的运行时间被限定在输入长度的多项式或更低级别，这些问题被视为容易解决的。这个论断是合理且实用的，最早被 Jack Edmonds(1965) 提出，现在已经被广泛接受。这一节，我们将要介绍并且考察这一类多项式时间可解的问题。
+    无向图、有向图、整数、数列、有限集合的有限族、布尔表达式等可数集中元素的性质判定问题构成了计算问题中相当大的一部分。当且仅当存在一个算法，算法的运行时间被限定在输入长度的多项式函数以内，这些问题被视为容易解决的。这个论断是合理且实用的，最早被 Jack Edmonds(1965) 提出，现在已经被广泛接受。这一节，我们将要介绍并且考察这一类多项式时间可解的问题。
 
     我们首先给出一个极度一般化的定义，定义出计算从可数定义域$D$到可数值域$R$的函数的确定性算法。
 
@@ -101,9 +104,9 @@ bottom=3cm}
 
     $\mathcal{A}$在输入$x\in D$上的{\bf计算}是一个唯一的串的序列$y1,y2,...$，且满足$y_1=E(x),y_{i+1}=\tau(y_i)$对于所有$i$，还要满足如果序列是有限的且结束于$y_k$，那么$y_k\in R$。任何计算过程中出现的串都被称为{\bf瞬时描述}。如果计算$\mathcal{A}$在输入x上的计算是有限的，且计算的长度为$t(x)$，那么$t(x)$被称为$\mathcal{A}$在$x$上的{\bf运行时间}。如果$\mathcal{A}$所有的计算都是有限的，则$\mathcal{A}$被称为{\bf停止的}。对于一个停止的算法$\mathcal{A}$，如果函数$f_\mathcal{A}:D\rightarrow R$对所有的$x$，$f_\mathcal{A}(x)$是$\mathcal{A}$在$x$上的计算的最后一个元素，则称$f_\mathcal{A}$是$\mathcal{A}$所计算的函数。
 
-    如果$R=\{ACCEPT,REJECT\}$，那么$\mathcal{A}$被称为一个{\bf判定算法}。定义域$D=\Sigma^*$的判定算法被称为{\bf 串判定算法}。一个串判定算法$\mathcal{A}${\bf所判定的语言}为$\{x\in\Sigma^*|f_\mathcal{A}(x)=ACCEPT\}$。如果$D=R=\Sigma^*$，则$\mathcal{A}$被称为{\bf 串映射算法}。对于一个定义域为$D=\Sigma^*$停止的算法$\mathcal{A}$，如果存在一个多项式函数$p(\cdot)$使得对任意$x\in\Sigma^*$，有$t(x)\le p(len(x))$，则称$\mathcal{A}${\bf运行在多项式时间内}。
+    如果$R=\{ACCEPT,REJECT\}$，那么$\mathcal{A}$被称为一个{\bf判定算法}。定义域$D=\Sigma^*$的判定算法被称为{\bf 串判定算法}。一个串判定算法$\mathcal{A}${\bf所判定的语言}为$\{x\in\Sigma^*|f_\mathcal{A}(x)=ACCEPT\}$。如果$D=R=\Sigma^*$，则$\mathcal{A}$被称为{\bf 串映射算法}。对于一个定义域为$D=\Sigma^*$且停止的算法$\mathcal{A}$，如果存在一个多项式函数$p(\cdot)$使得对任意$x\in\Sigma^*$，有$t(x)\le p(len(x))$，则称$\mathcal{A}${\bf运行在多项式时间内}。
 
-    在任何使用语境下讨论算法，我们都必须明确确定性算法的概念。各种不同类型的著名串判定算法（马尔科夫算法、单带图灵机、多带多头图灵机、随机存取机等）都限制函数$E$和$\tau$为简单明确的类型。对于这些概念，这里都使用标准的定义[Hopcroft \& Ullman(1969)]，不在进行赘述。今天人们已经发现这些类型的算法在他们判定语言的能力上是等价的；对于任意一个类型的算法，它所能判定的语言组成的集合都是递归语言集。这种不受计算模型定义影响的不变性暗示着递归是可判定性概念的正确定义方法。
+    在任何使用语境下讨论算法，我们都必须明确确定性算法的概念。各种不同类型的著名串判定算法（马尔科夫算法、单带图灵机、多带多头图灵机、随机存取机等）都不过是对函数$E$和$\tau$进行了限制。对于这些概念，这里都使用标准的定义[Hopcroft \& Ullman(1969)]，不在进行赘述。今天人们已经发现这些类型的算法在他们判定语言的能力上是等价的；对于任意一个类型的算法，它所能判定的语言组成的集合都是递归语言集。这种不受计算模型定义影响的不变性暗示着递归是可判定性概念的正确定义方法。
 
     可以被串判定算法在多项式时间内判定的语言组成的集合同样不随算法类型而改变。举个例子，任何一个可以在$p(\cdot)$时间内被多带图灵机判定的语言，都可以被单带图灵机在$p^2(\cdot)$时间内判定。因此单带图灵机多项式时间可判定的语言和更强大的多带图灵机在多项式时间内可判定的语言是一样的。类似的，随机读取机也有同样的性质。
     \begin{definition}
@@ -141,8 +144,8 @@ bottom=3cm}
     \item {\bf每一个clause最多有两个literal的可满足性问题}[Cook(1971)]\\
     输入：语句（Clause） $C_1,C_1,\cdots,C_p$，每一个都包含最多两个文字（literal）。\\
     性质：这些给定的语句 的合取是可满足的。也就是说存在集合$S\subseteq\{x_1,x_2,\cdots,x_n,\bar{x_1},\bar{x_2},\cdots,\bar{x_n}\}$，使得 \\
-    a) S 不包含互补的文字。\\
-    b) $S\cap C_k \neq \Phi, k = 1,2,\cdots,p$。
+    \indent a) S 不包含互补的文字。\\
+    \indent b) $S\cap C_k \neq \Phi, k = 1,2,\cdots,p$。
 
     \item {\bf最小生成树}[Kruskal(1956)]\\
     输入：$G, w, W$\\
@@ -162,7 +165,7 @@ bottom=3cm}
 
     \item {\bf边删除}\\
     输入：$G, k$\\
-    性质: 存在$k$个边组成的集合，删除这些边后，所有的环都不存在。
+    性质: 存在$k$个边组成的集合，删除这些边后，图中不存在环。
 
     \item {\bf偶匹配}[Hall(1948)]\\
     输入：$S\subseteq Z_p \times Z_p $\\
@@ -199,7 +202,7 @@ bottom=3cm}
         且$\Delta^*\cap \{ACCEPT,REJECT\}=\Phi$
     \item E是{\bf编码函数} $E:D\rightarrow\Delta^*$
     \item $\tau$是一个{\bf转移关系} \\
-        $\tau\subset\Delta^*\times(\Delta^*\cup \{ACCEPT,REJECT\})$
+        $\tau\subseteq\Delta^*\times(\Delta^*\cup \{ACCEPT,REJECT\})$
     \end{itemize}
     并且要求，对于所有$y_0 \in \Delta^*$，集合$\{<y_0,y>|<y_0,y>\in \tau\}$有少于$k_\mathcal{A}$个元素，其中$k_\mathcal{A}$是个常数。一个的$\mathcal{A}$在输入$x\in D$的{\bf计算}是一个序列$y_1,y_2,\cdots$，使得对$\forall i$有$y_1=E(x),<y_i,y_{i+1}\in\tau>$，并且，如果序列是有限的并且以$y_k$结尾，那么$y_k \in \{ACCEPT,REJECT\}$. 一个出现在某个计算中的串$y$被称为一个{\bf瞬时描述}。一个有限的且停止在$ACCEPT$上的计算被称为一个{\bf接受的计算}。对于输入$x$，如果存在一个接受的计算，则称$x$被{\bf接受}。如果$D=\Sigma^*$，那么我们称$\mathcal{A}$是一个{\bf非确定性串判定算法}。如果存在一个多项式函数$p(\cdot)$使得，对于所有$\mathcal{A}$接受的串$x$，都存在一个长度$\leq p(len(x))$的接受的计算，则称$\mathcal{A}${\bf运行在多项式时间内}。
 
@@ -261,13 +264,13 @@ bottom=3cm}
     \end{theorem}
 
     我们可以把完全的概念从定义在$\Sigma^*$上的语言扩展到定义在可数集上的问题。
-    
+
     \begin{definition}
         $D$是一个可数集，$e$是一个“标准”的一对一编码函数$e:D\rightarrow\Sigma^*$且$T$是$D$的一个子集。那么$T$是{\bf完全}的，当且仅当$e(T)$是完全的\footnote{此处原文为$e(D)$，应是笔误}。
     \end{definition}
 
     \begin{lemma}
-        用$D$和$D'$表示可数集，且有一对一编码函数$e$和$e'$。他们分别有子集$T\subset D$和$T'\subset D'$。如果存在函数$F:D\rightarrow D'$同时满足以下条件，则称$T\propto T'$。\\
+        用$D$和$D'$表示可数集，且有一对一编码函数$e$和$e'$。他们分别有子集$T\subseteq D$和$T'\subseteq D'$。如果存在函数$F:D\rightarrow D'$同时满足以下条件，则称$T\propto T'$。\\
         \indent a) $F(x)\in T' \Leftrightarrow x\in T$\\
         \indent b) 存在一个函数 $f\in\Pi$，使得 $f(x)=e'(F(e^{-1}(x)))$，只要$e'(F(e^{-1}(x)))$是有定义的。\\
     \end{lemma}
@@ -288,25 +291,25 @@ bottom=3cm}
     输入：图$G$，正整数$k$\\
     性质：存在$G$中$k$个互不相邻的节点组成的集合。
 
-    \item {\bf(SET PACKING)}\\
+    \item {\bf集合打包(SET PACKING)}\\
     输入：一族集合$\{S_j\}$，正整数$\ell$\\
     性质：$\{S_j\}$包含$\ell$个互斥集合。
 
     \item {\bf顶点覆盖(NODE COVER)}\\
     输入：图$G'$，正整数$\ell$\\
-    性质：存在集合$R\subset N'$，使得$|R|\leq\ell$且每一条边都与$R$中的某个顶点相邻。
+    性质：存在集合$R\subseteq N'$，使得$|R|\leq\ell$且每一条边都与$R$中的某个顶点相邻。
 
     \item {\bf集合覆盖(SET COVERING)}\\
     输入：有限集合组成的有限族$\{S_j\}$，正整数$k$\\
-    性质：存在一个子族$\{T_h\}\subset\{S_j\}$包含小于等于$k$个集合使得$\bigcup T_h=\bigcup S_j$。
+    性质：存在一个子族$\{T_h\}\subseteq\{S_j\}$包含小于等于$k$个集合使得$\bigcup T_h=\bigcup S_j$。
 
     \item {\bf反馈顶点集(FEEDBACK NODE SET)}\\
     输入：有向图$H$，正整数$k$\\
-    性质：存在一个集合$R\subset V$，使得$H$中的每个（有向）环包含一个$R$中的节点。
+    性质：存在一个集合$R\subseteq V$，使得$H$中的每个（有向）环包含一个$R$中的节点。
 
     \item {\bf反馈边集(FEEDBACK ARC SET)}\\
     输入：有向图$H$，正整数$k$\\
-    性质：存在一个集合$S\subset E$，使得$H$中的每个（有向）环包含一个$S$中的边。
+    性质：存在一个集合$S\subseteq E$，使得$H$中的每个（有向）环包含一个$S$中的边。
 
     \item {\bf有向汉密尔顿回路(DIRECTED HAMILTON CIRCUIT)}\\
     输入：有向图$H$\\
@@ -330,19 +333,19 @@ bottom=3cm}
 
     \item {\bf精确覆盖(EXACT COVER)}\\
     输入：集合$\{u_i,i=1,2,\cdots,t\}$的子集组成的族${S_j}$\\
-    性质：存在一个子族$\{T_h\}\subset\{S_j\}$，使得$T_h$两两互斥，且$\bigcup T_h=\bigcup S_j=\{u_i,i=1,2,\cdots,t\}$。
+    性质：存在一个子族$\{T_h\}\subseteq\{S_j\}$，使得$T_h$两两互斥，且$\bigcup T_h=\bigcup S_j=\{u_i,i=1,2,\cdots,t\}$。
 
     \item {\bf碰集(HITTING SET)}\\
     输入：集合$\{s_j,j=1,2,\cdots,t\}$的子集组成的族${U_i}$\\
     性质：存在一个集合$W$，使得对于所有$i$，$|W\cap U_i|=1$
 
     \item {\bf斯坦纳树(STEINER TREE)}\\
-    输入：图$G$，$R\subset N$，权重函数$w:A\rightarrow Z$，正整数$k$\\
+    输入：图$G$，$R\subseteq N$，权重函数$w:A\rightarrow Z$，正整数$k$\\
     性质：G有一个权重小于等于$k$的子树，包含所有$R$中的节点
 
     \item {\bf三维匹配(3-DIMENSIONAL MATCHING)}\\
-    输入：集合$U\subset T\times T\times T$，其中$T$是一个有限集\\
-    性质：存在一个集合$W\subset U$，使得$|W|=|T|$，且$W$中任意两个元素在任意一个维度上的值都不相同。
+    输入：集合$U\subseteq T\times T\times T$，其中$T$是一个有限集\\
+    性质：存在一个集合$W\subseteq U$，使得$|W|=|T|$，且$W$中任意两个元素在任意一个维度上的值都不相同。
 
     \item {\bf背包(KNAPSACK)}\\
     输入：$(a_1,a_2,\cdots,a_r,b)\in Z^{n+1}$(\\
@@ -363,12 +366,12 @@ bottom=3cm}
 
     \item {\bf集合划分(PARTITION)}\\
     输入：$(c_1,c_2,\cdots,c_s)\in Z^s$\\
-    性质：存在一个集合$I\subset\{1,2,\cdots,s\}$使得：
+    性质：存在一个集合$I\subseteq\{1,2,\cdots,s\}$使得：
     $$\sum_{h\in I}c_h = \sum_{h\notin I}c_h$$
 
     \item {\bf最大割}\\
     输入：图$G$，权重函数$w:A\rightarrow Z$，正整数$W$\\
-    性质：存在一个集合$S\subset N$，使得：
+    性质：存在一个集合$S\subseteq N$，使得：
     $$\sum_{\substack{\{u,v\}\in A \\ u\in S \\ v\notin S}} w(\{u,v\})\ge W$$
 
     \end{enumerate}
@@ -381,9 +384,9 @@ bottom=3cm}
 
     很明显，这些问题（更准确的说是他们在$\Sigma^*$中的编码）都属于$\mathcal{NP}$。我接下来将构造一系列的规约，证明$SAT$问题是可以规约到上面列出的每一个问题。图-1显示了这一系列的规约的过程。图中每一条线都代表一个从位置靠上的问题到位置靠下的问题的规约。
 
-    为了展示从集合$T\subset D$到集合$T'\subset D'$的规约。我们需要找到满足引理2的函数$F:D\rightarrow D'$。对于接下来我们给出的每个规约，读者可以很容的验证他们满足那些条件。
+    为了展示从集合$T\subseteq D$到集合$T'\subseteq D'$的规约。我们需要找到满足引理2的函数$F:D\rightarrow D'$。对于接下来我们给出的每个规约，读者可以很容的验证他们满足那些条件。
     \begin{itemize}
-    \item 可满足性问题（SAT）$\propto$ 0-1整数规划
+    \item {\bf可满足性问题（SAT）$\propto$ 0-1整数规划}
         \begin{equation}\nonumber % Remove numbering (before each equation)
         \begin{aligned}
             &c_{ij}=\left\{
@@ -402,8 +405,8 @@ bottom=3cm}
             &b_i=1-(C_i\text{中取补的变量个数})
         \end{aligned}
         \end{equation}
-        
-    \item 可满足性问题 $\propto$ 分团问题
+
+    \item {\bf可满足性问题 $\propto$ 分团问题}
         \begin{equation}\nonumber % Remove numbering (before each equation)
         \begin{aligned}
         & N = \{<\sigma,i>|\sigma\text{是}C_i\text{中出现的文字(Literal)}\} \\
@@ -412,7 +415,7 @@ bottom=3cm}
         \end{aligned}
         \end{equation}
 
-    \item 分团问题 $\propto$ SET PACKING
+    \item {\bf分团问题 $\propto$ 集合打包}
         假设$N=\{1,2,\cdots,n\}$。集合$S_1,S_2,\cdots,S_n$中的元素是那些不在$A$中的节点二元集$\{i,j\}$。
         \begin{equation}\nonumber % Remove numbering (before each equation)
         \begin{aligned}
@@ -421,7 +424,7 @@ bottom=3cm}
         \end{aligned}
         \end{equation}
 
-    \item 分团问题 $\propto$ 顶点覆盖
+    \item {\bf分团问题 $\propto$ 顶点覆盖}
         \begin{equation}\nonumber % Remove numbering (before each equation)
         \begin{aligned}
         & G' \text{是}G\text{补图}\\
@@ -429,11 +432,11 @@ bottom=3cm}
         \end{aligned}
         \end{equation}
 
-    \item 顶点覆盖 $\propto$ 集合覆盖\\
-    
+    \item {\bf顶点覆盖 $\propto$ 集合覆盖}\\
+
         假设$N'=\{1,2,\cdots,n\}$。则（集合覆盖问题中的集合的）元素为$G'$中的边。$S_j$是节点$j$的临边组成的集合。最后，$k=\ell$。
 
-    \item 顶点覆盖 $\propto$ 反馈顶点集
+    \item {\bf顶点覆盖 $\propto$ 反馈顶点集}
         \begin{equation}\nonumber % Remove numbering (before each equation)
         \begin{aligned}
         & V=N'
@@ -442,7 +445,7 @@ bottom=3cm}
         \end{aligned}
         \end{equation}
 
-    \item 顶点覆盖 $\propto$ 反馈边集
+    \item {\bf顶点覆盖 $\propto$ 反馈边集}
         \begin{equation}\nonumber % Remove numbering (before each equation)
         \begin{aligned}
         V=&N'\times\{0,1\}\\
@@ -452,7 +455,7 @@ bottom=3cm}
         \end{aligned}
         \end{equation}
 
-    \item 顶点覆盖 $\propto$ 有向汉密尔顿回路\\
+    \item {\bf顶点覆盖 $\propto$ 有向汉密尔顿回路}\\
         不失一般性的，我们假设$A'=Z_m$。
         \begin{equation}\nonumber % Remove numbering (before each equation)
         \begin{aligned}
@@ -470,7 +473,7 @@ bottom=3cm}
         \end{aligned}
         \end{equation}
 
-    \item 有向汉密尔顿回路 $\propto$ 无向汉密尔顿回路
+    \item {\bf有向汉密尔顿回路 $\propto$ 无向汉密尔顿回路}
         \begin{equation}\nonumber % Remove numbering (before each equation)
         \begin{aligned}
         N=  &V\times{0,1,2}\\
@@ -479,13 +482,13 @@ bottom=3cm}
         \end{aligned}
         \end{equation}
 
-    \item 可满足性问题 $\propto$ 3-可满足性问题\\
+    \item {\bf可满足性问题 $\propto$ 3-可满足性问题}\\
         把每个满足$\sigma_i$是文字且$m>3$的语句$\sigma_1\cup\sigma_2\cup\cdots\cup\sigma_m$替换为：
         $$(\sigma_1\cup\sigma_2\cup u_1) (\sigma3\cup\cdots\cup\sigma_m\cup\bar{u}_1)
         (\bar{\sigma}_3\cup u_1) \cdots(\bar{\sigma}_m\cup u_1)$$
         其中$u_1$是一个新的变量。重复这个变换直到没有语句有多于三个的文字。
 
-    \item 3-可满足性问题 $\propto$ 色数\\
+    \item {\bf3-可满足性问题 $\propto$ 色数}\\
         不失一般性的，我们假设$m>4$。
         \begin{equation}\nonumber % Remove numbering (before each equation)
         \begin{aligned}
@@ -500,7 +503,7 @@ bottom=3cm}
         \end{aligned}
         \end{equation}
 
-    \item 色数 $\propto$ 分团覆盖
+    \item {\bf色数 $\propto$ 分团覆盖}
         \begin{equation}\nonumber % Remove numbering (before each equation)
         \begin{aligned}
         & G'\text{是}G\text{的补图}\\
@@ -508,7 +511,7 @@ bottom=3cm}
         \end{aligned}
         \end{equation}
 
-    \item 色数 $\propto$ 精确覆盖\\
+    \item {\bf色数 $\propto$ 精确覆盖}\\
         精确覆盖问题中的集合为
         $$N\cup A\cup\{<u,e,f>|u\text{与}e\text{连接且}1\leq f \leq k\}$$
         族$\{S_j\}$构造如下：\\
@@ -524,10 +527,10 @@ bottom=3cm}
         \end{equation}
         其余集合都不属于$\{S_j\}$。
 
-    \item 精确覆盖 $\propto$ 碰集\\
+    \item {\bf精确覆盖 $\propto$ 碰集}\\
         碰集有集合$U_i$和元素$s_j$，使得$s_j\in U_i\Leftrightarrow u_i\in S_j$。
 
-    \item 精确覆盖 $\propto$ 斯坦纳树
+    \item {\bf精确覆盖 $\propto$ 斯坦纳树}
         \begin{equation}\nonumber % Remove numbering (before each equation)
         \begin{aligned}
         &N=\{n_o\}\cup\{S_j\}\cup\{u_i\}\\
@@ -539,7 +542,7 @@ bottom=3cm}
         \end{aligned}
         \end{equation}
 
-    \item 精确覆盖 $\propto$ 3维匹配\\
+    \item {\bf精确覆盖 $\propto$ 3维匹配}\\
         不失一般性的，我们假设$|S_j|>2$对于所有$j$。令$T=\{<i,j>|u_i\in S_j\}$。令$\alpha$是任意一个从$\{u_i\}$到$T$的一对一函数。令$\pi:T\rightarrow T$是一个置换，使得对每一个固定的j，$\{<i,j>|u_i\in S_j\}$是$\pi$的周期。
         \begin{equation}\nonumber % Remove numbering (before each equation)
         \begin{aligned}
@@ -548,13 +551,13 @@ bottom=3cm}
         \end{aligned}
         \end{equation}
 
-    \item 精确覆盖 $\propto$ 背包问题\\
+    \item {\bf精确覆盖 $\propto$ 背包问题}\\
         令$d=|\{S_j\}|+1$。令$\epsilon_{ji}=
         \left\{\begin{matrix}
             1 & \text{如果}u_i\in S_j \\
-            0 & \text{如果}u_i\notin S_j 
+            0 & \text{如果}u_i\notin S_j
         \end{matrix}\right.$ 令$r=|\{S_j\}|$。
-        
+
         \begin{equation}\nonumber % Remove numbering (before each equation)
         \begin{aligned}
         &a_j=\sum\epsilon_{ji}d^{i-1}\\
@@ -562,10 +565,10 @@ bottom=3cm}
         \end{aligned}
         \end{equation}
 
-    \item 背包问题 $\propto$ 工作排序
+    \item {\bf背包问题 $\propto$ 工作排序}
         $$p=r, T_i=P_i=a_i, D_i=b.$$
 
-    \item 背包问题 $\propto$ 集合划分
+    \item {\bf背包问题 $\propto$ 集合划分}
         \begin{equation}\nonumber % Remove numbering (before each equation)
         \begin{aligned}
         &s=r+2\\
@@ -575,7 +578,7 @@ bottom=3cm}
         \end{aligned}
         \end{equation}
 
-    \item 集合划分 $\propto$ 最大割
+    \item {\bf集合划分 $\propto$ 最大割}
         \begin{equation}\nonumber % Remove numbering (before each equation)
         \begin{aligned}
         &N=\{1,2,\cdots,s\}\\
@@ -586,136 +589,133 @@ bottom=3cm}
         \end{equation}
 
     \end{itemize}
-% \section{理论分析}
-%     \subsection{稀疏矩阵}
-%     稀疏矩阵采用二维链表的方式进行储存，可以高效的进行矩阵乘法，加快Gauss-Seidel方法和Conjugate Gradient方法的运算速度。二维链表结构如\figurename\ref{2DimensionLinkedList}所示。每个非零元素都储存为一个节点。节点中除了包含该节点的值、行号、列号以外，还存有两个指针，分别指向同一行的下一个节点和同一列的下一个节点。而所有的行的头指针和列的头指针则存在两个数组中。对于一个含有$m$个元素的规模为$n\times n$的稀疏矩阵，所需存储空间为$O(m+n)$。
-%     % \begin{figure}
-%     % \center
-%     % \includegraphics[width=9cm]{pictures/2DimensionLinkedList.png}
-%     % \caption{稀疏矩阵储存结构}\label{2DimensionLinkedList}
-%     % \end{figure}
-%         \subsubsection{\tt at(row, col)}
-%         这个函数内部实现方式是遍历第row行的节点，找到列号与col相等的节点。之后将该节点的值返回。如果没找到，则返回0。时间复杂度取决于该行有多少个元素。如果$m$个元素在$n$行分布均匀的话，则平均时间复杂度为$O(m/n)$。
+    这里列出的规约中，有一部分并不是本文原创的。Cook(1971)证明了 可满足性问题 $\propto$ 3-可满足性问题。 而
+    $$\text{可满足性问题 }\propto \text{分团问题}$$
+    的规约也隐含在Cook(1971)的文章中，并为Raymond Reiter所知。规约$$ \text{顶点覆盖}\propto\text{反馈顶点集}$$则被康奈尔大学计算机学院的算法研讨会所发现。规约$$ \text{顶点覆盖}\propto\text{反馈边集}$$ 被Lawler和笔者发现。Lawler发现了规约
+    $$\text{精确覆盖}\propto\text{3-可满足性问题}$$笔者发现了精确覆盖可以规约到权值为0或1的有向图上的有向旅行商问题。利用这个构造的更好版本，Tarjan证明了$$\text{精确覆盖}\propto\text{有向汉密尔顿回路}$$独立的，Lawler证明了$$\text{顶点覆盖}\propto\text{有向汉密尔顿回路}$$规约$$\text{有向汉密尔顿回路}\propto\text{无向汉密尔顿回路}$$则是由Tarjan指出的。
 
-%         \subsubsection{\tt insert(val, row, col)}
-%         首先要判断第row行、第col列的节点是否在链表中。如果在，且val不为0，则直接更改节点值为val。如果在，但是val为0，则删去这个节点。如果节点不在链表中，且val值不为0，则创建这个节点，插入链表中。因为要使每行的列号和每列的行号保持递增的顺序，所以插入时需要逐个遍历所在行和所在列。时间复杂度取决于要插入的行和列的节点个数。如果$m$个元素均匀分布在$n$行和$n$列，则时间复杂度为$O(m/n)$
+    下面我们列出自动机理论和语言理论中的三个问题。每个完全问题都可以规约到这三个问题。但是这三个问题却不能确定是$\mathcal{NP}$的，他们是否属于$\mathcal{NP}$至今仍是个谜。不熟悉自动机和语言理论的读者可以在Hopcroft和ULLman(1969)的论文中找到必要的定义。
+    \begin{itemize}
+      \item {\bf正则语言的等价性}\\
+      输入：在字母表\{0,1\}上的两个正则表达式\\
+      性质：这两个正则表达式定义了相同的语言
 
-%         \subsubsection{\tt initializeFromVector(rows,cols,vals)}
-%         这个实现方式不同于CRC和CRS。对于这种结构，如果矩阵稀疏的话，多次连续插入，直接调用insert即可。再优化的话，也只有常数级别的时间减少。
+      \item {\bf非确定性有限自动机等价性}\\
+          输入：输入字母表为\{0,1\}的一对非确定有限自动机\\
+          性质：这两个自动机定义了相同的语言
 
-%         \subsubsection{\tt 矩阵乘法}
-%         对$r\times s$稀疏矩阵$A$和$s\times t$的稀疏矩阵$B$进行乘法运算，如果$A$有$n$个非零元素，$B$有$m$个非零元素，则时间复杂度为$O(nt+mr)$。因为$n\leq rs$且$m \leq st$，所以这个乘法要快于直接按乘法定义进行计算的$O(rst)$。
-%     \subsection{Gauss-Seidel Method}
-%     求解线性方程组$AX=b$。将$A$分解为下三角矩阵$L_*$和严格上三角矩阵$U$，之后进行迭代:$$L_*x^{(k+1)}=b-Ux^{(k)}$$迭代过程也可写作$$x_i^{(k+1)}=\frac{1}{a_{ii}}\left(b_i-\sum_{j<i}a_{ij}x_j^{(k+1)}-\sum_{j>i}a_{ij}x_j^{(k)}\right)$$这就是Gauss-Seidel Method。如果A是对称正定阵，或者严格或不可约对角占优，则这个迭代一定收敛。实现上与Jacobi Method相似，不过每次计算出新的X中的元素就立即更新X，让更新的元素立刻参与下一个元素的计算。相比Jacobi Method收敛速度快很多。
+      \item {\bf上下文相关判定}\\
+      输入：一个上下文相关文法$\Lambda$和串$x$\\
+      性质：$x$属于$\Lambda$定义的语言
+    \end{itemize}
 
-%     \subsection{Conjugate Gradient Method}
-%     Conjugate Gradient是一种迭代求解线性方程组的方法。对于有唯一解$X_*$的线性方程组$AX=b$，如果$A$是实对称正定阵，则函数
-%     $$f(X)=\frac{1}{2}X^TAX-X^Tb$$
-%     当且仅当$X=X_*$时，取到最小值。所以求解$AX=b$的问题转变为
-%     $$\min f(X)$$
-%     常用的求函数最小值的方法有梯度下降法。但是梯度下降法实际上是一种贪心算法，收敛速度慢。共轭梯度法则是在每次迭代时，都选取与当前向量$X^{(k)}$共轭的方向进行优化。对于$n\times n$的矩阵A，最多迭代$n$次即可获得精确解，收敛速度快于梯度下降法。具体算法见下页$Algorithm$ \ref{Conjugate Gradient Algorithm}。
-%     \begin{algorithm}
-%       \caption{Conjugate Gradient Method}
-%       \label{Conjugate Gradient Algorithm}
-%       \begin{algorithmic}[1]
-%         \STATE $r_0:=b-AX_0$
-%         \STATE $p_0:=r_0$
-%         \STATE $k:=0$
-%         \LOOP
-%             \STATE $\alpha_k:=\frac{r_k^Tr_k}{p_k^TAp_k}$
-%             \STATE $x_{k+1}:=x_k+\alpha_kp_k$
-%             \STATE $r_{k+1}:=r_k-\alpha_kAp_k$
-%             \IF{$r_{k+1}$is sufficiently small}
-%                 \STATE Exit Loop
-%             \ENDIF
-%             \STATE $\beta_k:=\frac{r_{k+1}^Tr_{k+1}}{r_k^Tr_k}$
-%             \STATE $p_{k+1}:=r_{k+1}+\beta_kp_k$
-%             \STATE $k:=k+1$
-%         \ENDLOOP
-%         \STATE $x_{k+1}$is the result
-%         % \FORALL {$v \in V(G)$}
-%             % \STATE $l(v) \leftarrow \infty$
-%         % \ENDFOR
-%       \end{algorithmic}
-%     \end{algorithm}
+    首先我们证明$$\text{3-可满足性问题}\propto\text{正则语言的等价性}$$这个规约由两个阶段组成。第一个阶段我们构造一对在字母表$\Delta=\{u_1,u_2,\cdots,u_n,\bar{u}_1,\bar{u}_2,\cdots,\bar{u}_n\}$上的正则表达式.之后我们把这两个正则表达式转换到$\{0,1\}$上。
+
+    第一个正则表达式是$\Delta^n\Delta^*$(更准确的讲，$\Delta$代表$(u_1+u_2+\cdots+u_n+\bar{u}_1+\bar{u}_2+\cdots+\bar{u}_n)$，$\Delta^n$代表$n$个$\Delta$拷贝的连接\footnote{$n$次连接}）。第二个正则表达式是
+    $$\Delta^n\Delta^*\cup\left(\bigcup_{i=1}^{n}\Delta^*u_i\Delta^*\bar{u}_i\Delta^* \cup \Delta^*\bar{u}_i\Delta^*u_i\Delta^*\right)\cup\bigcup_{h=1}^{r}\theta(D_h)$$
+    其中
+    \begin{equation}\nonumber
+      \theta(D_h)=\left\{
+      \begin{aligned}
+        \Delta^*&\bar{\sigma}_1\Delta^*  \qquad \qquad \qquad \qquad \qquad \text{如果}D_h=\sigma_1\\
+        \Delta^*&\bar{\sigma}_1\Delta^*\bar{\sigma}_2\Delta^*
+            \cup \Delta^*\bar{\sigma}_2\Delta^*\bar{\sigma}_1\Delta^* \quad \text{如果}D_h=\sigma_1\cup\sigma_2\\
+        \Delta^*&\bar{\sigma}_1\Delta^*\bar{\sigma}_2\Delta^*\bar{\sigma}_3\Delta^*
+            \cup \Delta^*\bar{\sigma}_1\Delta^*\bar{\sigma}_3\Delta^*\bar{\sigma}_2\Delta^* \\
+            &\cup\Delta^*\bar{\sigma}_2\Delta^*\bar{\sigma}_1\Delta^*\bar{\sigma}_3\Delta^*
+                \cup \Delta^*\bar{\sigma}_2\Delta^*\bar{\sigma}_3\Delta^*\bar{\sigma}_1\Delta^* \\
+            &\cup\Delta^*\bar{\sigma}_3\Delta^*\bar{\sigma}_1\Delta^*\bar{\sigma}_2\Delta^*
+                \cup \Delta^*\bar{\sigma}_3\Delta^*\bar{\sigma}_2\Delta^*\bar{\sigma}_1\Delta^* \\
+        & \qquad \qquad \qquad \qquad \qquad \text{如果}D_h=\sigma_1\cup\sigma_2\\
+      \end{aligned}
+      \right.
+    \end{equation}
+
+    记$m$是大于等于$\log_2{|\Delta|}$的最小正整数，记$\Phi$为一个从$\Delta$到$\{0,1\}^m$的一对一的函数。把出现的每一个$\Delta$中的元素$a$都替换为$\Phi(a)$后，这样就把正则表达式替换为一个在$\{0,1\}$上的正则表达式。
+    $$\text{正则语言的等价性}\propto\text{非确定性有限自动机的等价性}$$
+    存在标准的多项式时间算法[Salomaa(1969)]来把一个正则表达式转换为一个等价的非确定性自动机。最后，我们来证明对于任意$L\in\mathcal{NP}$，$$L\propto\text{上下文相关判定}$$
+    假设$L$被一个非确定性图灵机在时间$p()$内判定。那么在字母表$\{0,1,\#\}$上的语言$\widetilde{L}$可以被一个模拟图灵机的非确定性线性有界自动机接受：
+    $$\widetilde{L}=\{\#^{p(len(x))}x\#^{p(len(x))}|x\in L\}$$
+    因此$\widetilde{L}$是上下文相关的，并且有一个上下文相关文法$\widetilde{\Gamma}$。因此$x\in L$当且仅当
+    $$\widetilde{\Gamma},\#^{p(len(x))}x\#^{p(len(x))}$$
+    是一个被“上下文相关判定”问题接受的输入。
+
+    最后，我们列出一些现在还不能确定是完全问题的$\mathcal{NP}$问题。
+    \begin{itemize}
+      \item {\bf图的同构性}\\
+      输入：图$G$和$G'$\\
+      性质：$G$与$G'$同构
+
+      \item {\bf非质数}\\
+          输入：正整数$k$\\
+          性质：$k$是合数
+
+      \item {\bf线性不等式组}\\
+      输入：整数矩阵$C$，整数向量$d$\\
+      性质：$Cx>d$有有理数解
+    \end{itemize}
+
+    \begin{appendices}
+      \section{附录\\
+      问题中使用的符号与术语}
+      \noindent命题演算
+      \begin{equation}\nonumber
+      \begin{aligned}
+        &x_1,x_2,\cdots,x_n \qquad u_1,u_2,\cdots,u_m & \text{逻辑变量}\\
+        &\bar{x}_1,\bar{x}_2,\cdots,\bar{x}_n \qquad \bar{u}_1,\bar{u}_2,\cdots,\bar{u}_m & \text{逻辑变量的补}\\
+        &\sigma,\sigma_i & \text{文字(Literals)}\\
+        &C_1,C_2,\cdots,C_p \qquad D_1,D_2,\cdots,D_r & \text{语句}\\
+        &C_k\subseteq \{x_1,x_2,\cdots,x_n,\bar{x}_1,\bar{x}_2,\cdots,\bar{x}_n\}\\
+        &D_\ell\subseteq \{u_1,u_2,\cdots,u_m,\bar{u}_1,\bar{u}_2,\cdots,\bar{u}_m\}\\
+      \end{aligned}
+      \end{equation}
+      一个语句中不会出现互补文字\\
+      
+      \noindent标量、向量、矩阵
+      \begin{equation}\nonumber
+      \begin{aligned}
+        &Z& \text{正整数集}\\
+        &Z^P& \text{正整数的}p-\text{元组}\\
+        &Z_p& \text{集合}\{0,1,\cdots,p-1\}\\
+        &k,W& Z\text{中元素}\\
+        &<x,y>& \text{有序对}\\
+        &(a_i),(y_j),d& \text{非负整数组成的向量}\\
+        &(c_{ij}),C& \text{整数矩阵}\\
+      \end{aligned}
+      \end{equation}
+      \\
+      
+      \noindent图和有向图
+      \begin{equation}\nonumber
+      \begin{aligned}
+      &G=(N,A) G'=(N',A') \qquad \text{有限图}\\
+      &N,N' \qquad \text{顶点集} \qquad A,A' \qquad \text{边集}\\
+      &s,t,u,v \qquad \text{顶点} \qquad e,\{u,v\} \qquad \text{边}\\
+      &(X,\bar{X})=\{\{u,v\}| u\in X\text{且}v\in \bar{X}\} \qquad \text{割}\\
+      &w:A\rightarrow Z \qquad w':A'\rightarrow Z \qquad \text{权值函数}\\
+      &\text{子图的权值是指它的边的权值之和}\\
+      &H=(V,E) \qquad \text{有向图} \qquad V \quad \text{顶点集}, E \quad \text{边集}\\
+      &e,<u,v> \text{边}
+      \end{aligned}
+      \end{equation}
+      \\
+      
+      \noindent集合
+      \begin{equation}\nonumber
+      \begin{aligned}
+      &\Phi& \text{空集} \\
+      &|S| & \text{有限集}S\text{的元素个数} \\
+      &\{S_j\},\{T_h\},\{U_i\}&\text{有限集的有限族}
+      \end{aligned}
+      \end{equation}
+    \end{appendices}
 
 
 
-% \section{实现细节}
-%     对于稀疏矩阵全都使用自己实现的模版{\tt SparseMatrix<DataType>}来存储。对于列向量全部使用STL标准库中的{\tt std::vector<DataType>来储存}。Gauss-Seidel Method和Conjugate Gridient Method实现为两个函数模版。所有的模版都在{\tt SparseMatrix.h}中。
-%     \subsection{稀疏矩阵\tt SparseMatrix<DataType>}
-%     对于稀疏矩阵，我实现了模版{\tt SparseMatrix<DataType>}。模版是比较适合来实现矩阵这种通用的数据类型的。以后可以很方便的指定是整型矩阵或浮点型矩阵，甚至是虚数矩阵。主要成员函数如下:
-%     \begin{itemize}
-%     \item {\tt SparseMatrix(int rows, int cols); $\backslash\backslash$构造函数}
-%     \item {\tt \verb1~1SparseMatrix(); $\backslash\backslash$析构函数}
-%     \item {\tt DataType at(unsigned int row, unsigned int col); $\backslash\backslash$获得指定位置的值}
-%     \item {\tt void insert(DataType val, unsigned int row, unsigned int col); $\backslash\backslash$插入一个元素}
-%     \item {\tt void initializeFromVector(std::vector<int>\& rows, \newline
-%         \hphantom{void initializeFromVector(}std::vector<int>\& cols, \newline
-%         \hphantom{void initializeFromVector(}std::vector<DataType>\& vals) $\backslash\backslash$ 从向量初始化}
-%     \end{itemize}
-%     非成员函数如下：
-%     \begin{itemize}
-%     \item {\tt void mul(const SparseMatrix<DataType>\& left, \newline
-%         \hphantom{void mul(}const std::vector<DataType>\& right, \newline
-%         \hphantom{void mul(}std::vector<DataType>\& result); $\backslash\backslash$矩阵$\times$列向量}
-%     \item {\tt void mul(const SparseMatrix<DataType>\& left, \newline
-%         \hphantom{void mul(} const SparseMatrix<DataType>\& right, \newline
-%         \hphantom{void mul(}SparseMatrix<DataType>\& result); $\backslash\backslash$矩阵$\times$矩阵}
-%     \item {\tt std::ostream\& operator<< (std::ostream\& os, \newline
-%         \hphantom{std::ostream\& operator<< (}SparseMatrix<DataType>\& mat)$\backslash\backslash$输出矩阵为可读字符串，方便调试}
-%     \end{itemize}
 
-%     \subsection{Gauss-Seidel Method}
-%     {\tt void gaussSeidel(SparseMatrix<DataType>\& A, \newline
-%         \hphantom{void gaussSeidel(}std::vector<DataType>\& b, \newline
-%         \hphantom{void gaussSeidel(}std::vector<DataType>\& X, $\backslash\backslash$求解结果\newline
-%         \hphantom{void gaussSeidel(}DataType accuracy $\backslash\backslash$精度\newline
-%         \hphantom{void gaussSeidel(});}\\
-%     函数进行了矩阵大小的检查，保证$A$的行数和$b$的行数是一样的，如果不一样则退出程序。但是并不会检查$A$是否满足收敛条件。需要使用者自己保证收敛。
 
-%     \subsection{Conjugate Gridient Method}
-%     {\tt void conjugateGridient(SparseMatrix<DataType>\& A, \newline
-%         \hphantom{void conjugateGridient(}std::vector<DataType>\& b, \newline
-%         \hphantom{void conjugateGridient(}std::vector<DataType>\& X, $\backslash\backslash$求解结果\newline
-%         \hphantom{void conjugateGridient(}DataType accuracy $\backslash\backslash$精度\newline
-%         \hphantom{void conjugateGridient(});}\\
-%     函数进行了矩阵大小的检查，保证$A$的行数和$b$的行数是一样的，如果不一样则退出程序。但是并不会检查$A$是否是实对称正定阵。需要使用者自己保证$A$是实对称正定阵。
 
-% \subsection{实验结果}
-%     {\tt main.cpp}中的{\tt main}函数是一个简单的测试程序。首先使用initializeFromVector生成一个如下的$100,000\times100,000$的实对称正定阵稀疏矩阵$A$。再生成如下一个列向量$b$。
-%     $$\begin{bmatrix}
-%         3&1&      &      &\\
-%         1&3&1     &      &\\
-%          &1&\ddots&\ddots&\\
-%          & &\ddots&3     &1\\
-%          & &      &1     &3\\
-%     \end{bmatrix}
-%     X=
-%     \begin{bmatrix}
-%         0 \\
-%         1 \\
-%         \vdots \\
-%         \vdots \\
-%         100000 \\
-%     \end{bmatrix}
-%     $$
-%     设置精度为$10^{-9}$，使用两种方法求解线性方程组$AX=b$。Gauss-Seidel Method用时3.237s。Conjugate Gridient Method用时8.823s。而且两种方法计算结果十分接近，说明求解结果正确。运行中打印信息如下,截图见\figurename\ref{run}。
-%     \begin{verbatim}Generating A and b.
-% Solving AX=b.
-% A is of size 100000*100000.
-% Error is required to be smaller than 1e-009.
-% Using Gauss-Seidel Method...
-% Gauss-Seidel method took 3.237 seconds.
-% Using Conjugate Gridient Method...
-% Conjugate Gridient method took 8.823 seconds.
-% Difference of the two solutions is less than 4.65661e-010\end{verbatim}
-%     % \begin{figure}
-%     % \center
-%     % \includegraphics[]{pictures/run.png}
-%     % \caption{运行结果}\label{run}
-%     % \end{figure}
 
-%     除此之外还曾构造过多个测试样例进行测试，以保证程序正确性。
+
 \end{CJK}
 \end{document} 
