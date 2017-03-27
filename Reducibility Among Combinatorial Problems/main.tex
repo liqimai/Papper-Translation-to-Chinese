@@ -6,7 +6,7 @@
 %使用定理环境的交叉引用，要加上thref选项；使用证明结束符，要加上thmmarks选项（？）
 \usepackage{graphicx}
 \usepackage{subfigure}
-\usepackage{CJKutf8}
+\usepackage{ctex}
 \usepackage{algorithm}
 \usepackage{algorithmic}
 \renewcommand\figurename{图}
@@ -23,7 +23,7 @@ bottom=3cm}
 \setlength{\parskip}{0.5em}
 
 
-\begin{CJK}{UTF8}{gbsn}
+% \begin{CJK}{UTF8}{gbsn}
     \newtheorem{definition}{\hspace{2em}定义}
     \newtheorem{lemma}{\hspace{2em}引理}
     \newtheorem{theorem}{\hspace{2em}定理}
@@ -32,43 +32,43 @@ bottom=3cm}
     \theoremstyle{nonumberplain}%nonumberplain是不编号的定理环境
     \theoremsymbol{\ensuremath{\Box}}%设置定理结束符
     \newtheorem{proof}{\hspace{2em}证明}
-\end{CJK}
+% \end{CJK}
 
 
 % \setlength{}
 \usepackage{cite}
 % \usepackage{endnotes}
 \title{
-    \begin{CJK}{UTF8}{gbsn}
+    % \begin{CJK}{UTF8}{gbsn}
     组合问题中的可归约性
-    \end{CJK}
+    % \end{CJK}
     \thanks{This research was partially supported by National Science Foundation Grant CJ-474.}
     % \thanks{这项研究得到了美国国家科学基金会CJ-474的部分支持。}
 }
 \author{
     % \alignauthor
-    \begin{CJK}{UTF8}{gbsn}
+    % \begin{CJK}{UTF8}{gbsn}
     作者
-    \end{CJK}
+    % \end{CJK}
     Richard M. Karp\\
-    \begin{CJK}{UTF8}{gbsn}
+    % \begin{CJK}{UTF8}{gbsn}
     加州大学伯克利分校
-    \end{CJK}
+    % \end{CJK}
     \\
-    \begin{CJK}{UTF8}{gbsn}
+    % \begin{CJK}{UTF8}{gbsn}
     译者 李其迈
-    \end{CJK}
+    % \end{CJK}
     \\
-    \begin{CJK}{UTF8}{gbsn}
+    % \begin{CJK}{UTF8}{gbsn}
     浙江大学
-    \end{CJK}
+    % \end{CJK}
 }
 \date{}
 % 实验内容，理论分析，实验细节，实验结果
 \begin{document}
 \maketitle
 
-\begin{CJK}{UTF8}{gbsn}
+% \begin{CJK}{UTF8}{gbsn}
 \renewcommand\abstractname{摘要}
 \begin{abstract}
 无向图、有向图、整数、数列、有限集合的有限族、布尔表达式等可数集中元素的性质判定问题构成了计算问题中相当大的一部分。通过简单的编码将这些可数集映射到一个定义在有限字母表上的串集中，这些问题可以被转化为语言的判定问题，籍此我们可以讨论它们的计算复杂性。当一个解终止所需要的计算次数是它的输入长度的多项式或更低阶函数，则认为这个解对应的问题得到了满意的解决。本文展示了许多经典的转化、匹配、装箱、路由、分配问题都是等价的，即它们要么全都是多项式时间可解问题，要么全都不是。
@@ -80,7 +80,8 @@ bottom=3cm}
 
     对于多项式时间算法的存在性我们具有特别的兴趣。我们证明了一部分著名的组合问题，包括上文中提到的那些，它们都是等价的，即任何一个问题存在多项式时间算法都可推出其它问题存在多项式时间算法。我们也证明了，如果这些问题存在多项式时间算法，一个出乎意料大的问题集合内的问题（简单的讲，所有通过回溯算法在多项式深度内可解的问题）都存在多项式时间算法。
 
-    接下来是对本文内容的简短总结。明确的讲，我们所做的工作都是围绕着单带图灵机的语言判定问题来进行的，但是对于其它的抽象计算模型也有同样的理论。将所有0、1有限串组成的集合记为$\Sigma^*$。$\Sigma^*$的子集称为{\bf语言}。$\mathcal{P}$代表所有单带确定性图灵机上多项式时间内可判定的语言组成的集合。$\mathcal{NP}$代表所有单带非确定性图灵机上多项式时间内可判定的语言组成的集合。$\Pi$代表所有$\Sigma^*\to\Sigma^*$的单带确定性图灵机上多项式时间内可计算的函数。$L$和$M$各代表一个语言。如果存在一个函数$f\in\Pi$，使得($f(x)\in M)\Leftrightarrow(x\in L)$，则称$L${\bf 可归约到}$M$，记为$L\propto M$。如果$M\in\mathcal{P}$且$L\propto M$，则$L\in\mathcal{P}$。如果$L\propto M$且$M\propto L$则称$L$和$M$等价。如果$L\in\mathcal{NP}$且$\mathcal{NP}$中所有的语言都可以规约到$L$，则称$L$是（{\bf多项式}）{\bf完全}的。要么所有的完全语言都属于$\mathcal{P}$，要么都不是。当且仅当$\mathcal{P} = \mathcal{NP}$时，所有的完全语言都属于$\mathcal{P}$。
+    接下来是对本文内容的简短总结。明确的讲，我们所做的工作都是围绕着单带图灵机的语言判定问题来进行的，但是对于其它的抽象计算模型也有同样的理论。将所有0、1有限串组成的集合记为$\Sigma^*$。$\Sigma^*$的子集称为{\bf 语言}。$\mathcal{P}$代表所有单带确定性图灵机上多项式时间内可判定的语言组成的集合。$\mathcal{NP}$代表所有单带非确定性图灵机上多项式时间内可判定的语言组成的集合。$\Pi$代表所有$\Sigma^*\to\Sigma^*$的单带确定性图灵机上多项式时间内可计算的函数。$L$和$M$各代表一个语言。如果存在一个函数$f\in\Pi$，使得($f(x)\in M)\Leftrightarrow(x\in L)$，则称$L${\bf 可归约到}$M$，记为$L\propto M$。
+    如果$M\in\mathcal{P}$且$L\propto M$，则$L\in\mathcal{P}$。如果$L\propto M$且$M\propto L$则称$L$和$M$等价。如果$L\in\mathcal{NP}$且$\mathcal{NP}$中所有的语言都可以规约到$L$，则称$L$是（{\bf 多项式}）{\bf 完全}的。要么所有的完全语言都属于$\mathcal{P}$，要么都不是。当且仅当$\mathcal{P} = \mathcal{NP}$时，所有的完全语言都属于$\mathcal{P}$。
 
     本文的主要贡献是证明了一大批数学规划、图论、组合数学、计算逻辑学和开关理论中的经典计算问题，当他们转化为语言判定问题后，是完全的（因此也是等价的）。
 
@@ -93,18 +94,18 @@ bottom=3cm}
 
     对于任意有限字母表$A$，记$A$中元素构成的有限串所组成的集合为$A^*$；对于$x\in A^*$，记$x$的长度为$len(x)$。
 
-    {\bf确定性算法}$\mathcal{A}\triangleq(D,R,\Delta,E,\tau)$，其中：
+    {\bf 确定性算法}$\mathcal{A}\triangleq(D,R,\Delta,E,\tau)$，其中：
     \begin{itemize}
-    \item $D$({\bf定义域})是一个可数集
-    \item $R$({\bf值域})是一个可数集
+    \item $D$({\bf 定义域})是一个可数集
+    \item $R$({\bf 值域})是一个可数集
     \item $\Delta$是字母表，且$\Delta^*\cap R=\Phi$
-    \item E是{\bf编码函数} $E:D\rightarrow\Delta^*$
-    \item $\tau$是一个{\bf转移函数 }$\tau:\Delta^*\rightarrow\Delta^*\cup R$
+    \item E是{\bf 编码函数} $E:D\rightarrow\Delta^*$
+    \item $\tau$是一个{\bf 转移函数 }$\tau:\Delta^*\rightarrow\Delta^*\cup R$
     \end{itemize}
 
-    $\mathcal{A}$在输入$x\in D$上的{\bf计算}是一个唯一的串的序列$y1,y2,...$，且满足$y_1=E(x),y_{i+1}=\tau(y_i)$对于所有$i$，还要满足如果序列是有限的且结束于$y_k$，那么$y_k\in R$。任何计算过程中出现的串都被称为{\bf瞬时描述}。如果计算$\mathcal{A}$在输入x上的计算是有限的，且计算的长度为$t(x)$，那么$t(x)$被称为$\mathcal{A}$在$x$上的{\bf运行时间}。如果$\mathcal{A}$所有的计算都是有限的，则$\mathcal{A}$被称为{\bf停止的}。对于一个停止的算法$\mathcal{A}$，如果函数$f_\mathcal{A}:D\rightarrow R$对所有的$x$，$f_\mathcal{A}(x)$是$\mathcal{A}$在$x$上的计算的最后一个元素，则称$f_\mathcal{A}$是$\mathcal{A}$所计算的函数。
+    $\mathcal{A}$在输入$x\in D$上的{\bf 计算}是一个唯一的串的序列$y1,y2,...$，且满足$y_1=E(x),y_{i+1}=\tau(y_i)$对于所有$i$，还要满足如果序列是有限的且结束于$y_k$，那么$y_k\in R$。任何计算过程中出现的串都被称为{\bf 瞬时描述}。如果计算$\mathcal{A}$在输入x上的计算是有限的，且计算的长度为$t(x)$，那么$t(x)$被称为$\mathcal{A}$在$x$上的{\bf 运行时间}。如果$\mathcal{A}$所有的计算都是有限的，则$\mathcal{A}$被称为{\bf 停止的}。对于一个停止的算法$\mathcal{A}$，如果函数$f_\mathcal{A}:D\rightarrow R$对所有的$x$，$f_\mathcal{A}(x)$是$\mathcal{A}$在$x$上的计算的最后一个元素，则称$f_\mathcal{A}$是$\mathcal{A}$所计算的函数。
 
-    如果$R=\{ACCEPT,REJECT\}$，那么$\mathcal{A}$被称为一个{\bf判定算法}。定义域$D=\Sigma^*$的判定算法被称为{\bf 串判定算法}。一个串判定算法$\mathcal{A}${\bf所判定的语言}为$\{x\in\Sigma^*|f_\mathcal{A}(x)=ACCEPT\}$。如果$D=R=\Sigma^*$，则$\mathcal{A}$被称为{\bf 串映射算法}。对于一个定义域为$D=\Sigma^*$且停止的算法$\mathcal{A}$，如果存在一个多项式函数$p(\cdot)$使得对任意$x\in\Sigma^*$，有$t(x)\le p(len(x))$，则称$\mathcal{A}${\bf运行在多项式时间内}。
+    如果$R=\{ACCEPT,REJECT\}$，那么$\mathcal{A}$被称为一个{\bf 判定算法}。定义域$D=\Sigma^*$的判定算法被称为{\bf 串判定算法}。一个串判定算法$\mathcal{A}${\bf 所判定的语言}为$\{x\in\Sigma^*|f_\mathcal{A}(x)=ACCEPT\}$。如果$D=R=\Sigma^*$，则$\mathcal{A}$被称为{\bf 串映射算法}。对于一个定义域为$D=\Sigma^*$且停止的算法$\mathcal{A}$，如果存在一个多项式函数$p(\cdot)$使得对任意$x\in\Sigma^*$，有$t(x)\le p(len(x))$，则称$\mathcal{A}${\bf 运行在多项式时间内}。
 
     在任何使用语境下讨论算法，我们都必须明确确定性算法的概念。各种不同类型的著名串判定算法（马尔科夫算法、单带图灵机、多带多头图灵机、随机存取机等）都不过是对函数$E$和$\tau$进行了限制。对于这些概念，这里都使用标准的定义[Hopcroft \& Ullman(1969)]，不在进行赘述。今天人们已经发现这些类型的算法在他们判定语言的能力上是等价的；对于任意一个类型的算法，它所能判定的语言组成的集合都是递归语言集。这种不受计算模型定义影响的不变性暗示着递归是可判定性概念的正确定义方法。
 
@@ -118,7 +119,7 @@ bottom=3cm}
 
     读者可以把$\mathcal{P}$理解为可以被（内存无限的）数码计算机在多项式时间内判定的语言，把$\Pi$理解为可以被这种计算机在多项式时间内完成的串映射。这种理解是正确的。
 
-    {\bf注意到}，如果$f:\Sigma^*\to\Sigma^*$属于$\Pi$，那么就有一个多项式函数$p(\cdot)$，使得$len(f(x))\le p(len(x))$。
+    {\bf 注意到}，如果$f:\Sigma^*\to\Sigma^*$属于$\Pi$，那么就有一个多项式函数$p(\cdot)$，使得$len(f(x))\le p(len(x))$。
 
     我们接下来介绍规约的概念。规约的概念是本文的重中之重。
     \begin{definition}
@@ -132,7 +133,7 @@ bottom=3cm}
         下面给出一个多项式时间算法来判定$x$是否属于$L$：计算$f(x)$，之后在多项式时间内判断是否有$f(x)\in M$。
     \end{proof}
 
-    除了$\Sigma^*$，我们也对判定其它可数集的子集的难度感兴趣。给定集合$D$，就有一个很自然的一对一的编码函数$e:D\to\Sigma^*$。举个例子，我们可以把正整数编码成0-1串，把一维数组编码成整数列表，把矩阵编码成一维数组的列表，等等。而把列表编码成有限字符集的串，把有限字符集的串编码成0-1串，都是有标准方法可以遵循的。给定一个编码$e:D\to\Sigma^*$和集合$T\subseteq D$，如果$e(T)\in\mathcal{P}$，我们说集合$T${\bf多项式时间可判定}。同样的，给定$T\subseteq D$和$U\subseteq D'$以及编码函数$e:D\to\Sigma^*$和$e':D'\to\Sigma^*$，如果$e(T)\propto e'(U)$，则称$T\propto U$。
+    除了$\Sigma^*$，我们也对判定其它可数集的子集的难度感兴趣。给定集合$D$，就有一个很自然的一对一的编码函数$e:D\to\Sigma^*$。举个例子，我们可以把正整数编码成0-1串，把一维数组编码成整数列表，把矩阵编码成一维数组的列表，等等。而把列表编码成有限字符集的串，把有限字符集的串编码成0-1串，都是有标准方法可以遵循的。给定一个编码$e:D\to\Sigma^*$和集合$T\subseteq D$，如果$e(T)\in\mathcal{P}$，我们说集合$T${\bf 多项式时间可判定}。同样的，给定$T\subseteq D$和$U\subseteq D'$以及编码函数$e:D\to\Sigma^*$和$e':D'\to\Sigma^*$，如果$e(T)\propto e'(U)$，则称$T\propto U$。
 
     一个可数集存在多种自然编码方式是可能的。举个例子，一个图可以被表示成邻接矩阵，关联矩阵，或者是边对应的顶点对的无序列表。对于以上任何一种表示方式，不同的格式，标点也会形成不同的编码。幸运的是，大多数时候对同一个问题的两种合理的编码$e_0,e_1$都是明显等价的，即$e_0(S)\in\mathcal{P}\Leftrightarrow e_1(S)\in\mathcal{P}$。一个重要的例外是正整数编码应该以二进制的形式编码，而不是一进制。注意到多项式时间内可判定性的不变性，我们都会在问题的原始集合内展开讨论，不再指定一个到$\Sigma^*$的编码。
 
@@ -141,41 +142,41 @@ bottom=3cm}
     每一个问题会给出问题空间中元素的一般化表示（输入），以及导致输入被“接受”的性质。
 
     \begin{itemize}
-    \item {\bf每一个clause最多有两个literal的可满足性问题}[Cook(1971)]\\
+    \item {\bf 每一个clause最多有两个literal的可满足性问题}[Cook(1971)]\\
     输入：语句（Clause） $C_1,C_1,\cdots,C_p$，每一个都包含最多两个文字（literal）。\\
     性质：这些给定的语句 的合取是可满足的。也就是说存在集合$S\subseteq\{x_1,x_2,\cdots,x_n,\bar{x_1},\bar{x_2},\cdots,\bar{x_n}\}$，使得 \\
     \indent a) S 不包含互补的文字。\\
     \indent b) $S\cap C_k \neq \Phi, k = 1,2,\cdots,p$。
 
-    \item {\bf最小生成树}[Kruskal(1956)]\\
+    \item {\bf 最小生成树}[Kruskal(1956)]\\
     输入：$G, w, W$\\
     性质: 存在一个权值小于等于$W$最小生成树
 
-    \item {\bf最短路问题}[Dijkstra(1959)]\\
+    \item {\bf 最短路问题}[Dijkstra(1959)]\\
     输入：$G, w, W, s, t$\\
     性质: 存在一个$s$到$t$的权值小于等于$W$的路径
 
-    \item {\bf最小割}[Edmonds \& Karp(1972)]\\
+    \item {\bf 最小割}[Edmonds \& Karp(1972)]\\
     输入：$G, w, W, s, t$\\
     性质: 存在一个权值小于$W$的$s-t$割
 
-    \item {\bf边覆盖}[Edmonds(1965)]\\
+    \item {\bf 边覆盖}[Edmonds(1965)]\\
     输入：$G, k$\\
     性质: 存在一个集合$Y\subseteq A$，使得$|Y|\le k$且每个节点都与一个$Y$中的边临接。
 
-    \item {\bf边删除}\\
+    \item {\bf 边删除}\\
     输入：$G, k$\\
     性质: 存在$k$个边组成的集合，删除这些边后，图中不存在环。
 
-    \item {\bf偶匹配}[Hall(1948)]\\
+    \item {\bf 偶匹配}[Hall(1948)]\\
     输入：$S\subseteq Z_p \times Z_p $\\
     性质: 输入中的有序对代表图的边。要求的性质为$S$代表一个二分图的边集。
 
-    \item {\bf带有截止期限的排序}[Hall(1948)]\\
+    \item {\bf 带有截止期限的排序}[Hall(1948)]\\
     输入：$(T_1,\cdots,T_n)\in Z^n, (D_1,\cdots,D_n)\in Z^n, k$\\
     性质: 一个人从0时刻开始进行工作$1,2,\cdots,n$，这些工作需要的工时为$T_i$，且各自的截止期限为$D_i$。在某些顺序下可以保证不超过$k$个工作错过截止期限。
 
-    \item {\bf线性方程的有解性}[Hall(1948)]\\
+    \item {\bf 线性方程的有解性}[Hall(1948)]\\
     输入：$(c_{ij}), (a_i)$\\
     性质: 存在一个向量$(y_j)$，使得对所有$i$有$\sum_j c_{ij}y_j = a_i$
     \end{itemize}
@@ -195,16 +196,16 @@ bottom=3cm}
         根据polynomial-bounded existential quantification 从$\mathcal{P}^{(2)}$中的元素导出的语言组成的集合称为$\mathcal{NP}$。
     \end{definition}
 
-    $\mathcal{NP}$中的语言有另外一个跟非确定性图灵机相关的刻画方式。一个{\bf非确定性判定算法}$\mathcal{A}\triangleq(D,\Delta,E,\tau)$，其中：
+    $\mathcal{NP}$中的语言有另外一个跟非确定性图灵机相关的刻画方式。一个{\bf 非确定性判定算法}$\mathcal{A}\triangleq(D,\Delta,E,\tau)$，其中：
     \begin{itemize}
-    \item $D$({\bf定义域})是一个可数集
+    \item $D$({\bf 定义域})是一个可数集
     \item $\Delta$是字母表， \\
         且$\Delta^*\cap \{ACCEPT,REJECT\}=\Phi$
-    \item E是{\bf编码函数} $E:D\rightarrow\Delta^*$
-    \item $\tau$是一个{\bf转移关系} \\
+    \item E是{\bf 编码函数} $E:D\rightarrow\Delta^*$
+    \item $\tau$是一个{\bf 转移关系} \\
         $\tau\subseteq\Delta^*\times(\Delta^*\cup \{ACCEPT,REJECT\})$
     \end{itemize}
-    并且要求，对于所有$y_0 \in \Delta^*$，集合$\{<y_0,y>|<y_0,y>\in \tau\}$有少于$k_\mathcal{A}$个元素，其中$k_\mathcal{A}$是个常数。一个的$\mathcal{A}$在输入$x\in D$的{\bf计算}是一个序列$y_1,y_2,\cdots$，使得对$\forall i$有$y_1=E(x),<y_i,y_{i+1}\in\tau>$，并且，如果序列是有限的并且以$y_k$结尾，那么$y_k \in \{ACCEPT,REJECT\}$. 一个出现在某个计算中的串$y$被称为一个{\bf瞬时描述}。一个有限的且停止在$ACCEPT$上的计算被称为一个{\bf接受的计算}。对于输入$x$，如果存在一个接受的计算，则称$x$被{\bf接受}。如果$D=\Sigma^*$，那么我们称$\mathcal{A}$是一个{\bf非确定性串判定算法}。如果存在一个多项式函数$p(\cdot)$使得，对于所有$\mathcal{A}$接受的串$x$，都存在一个长度$\leq p(len(x))$的接受的计算，则称$\mathcal{A}${\bf运行在多项式时间内}。
+    并且要求，对于所有$y_0 \in \Delta^*$，集合$\{<y_0,y>|<y_0,y>\in \tau\}$有少于$k_\mathcal{A}$个元素，其中$k_\mathcal{A}$是个常数。一个的$\mathcal{A}$在输入$x\in D$的{\bf 计算}是一个序列$y_1,y_2,\cdots$，使得对$\forall i$有$y_1=E(x),<y_i,y_{i+1}\in\tau>$，并且，如果序列是有限的并且以$y_k$结尾，那么$y_k \in \{ACCEPT,REJECT\}$. 一个出现在某个计算中的串$y$被称为一个{\bf 瞬时描述}。一个有限的且停止在$ACCEPT$上的计算被称为一个{\bf 接受的计算}。对于输入$x$，如果存在一个接受的计算，则称$x$被{\bf 接受}。如果$D=\Sigma^*$，那么我们称$\mathcal{A}$是一个{\bf 非确定性串判定算法}。如果存在一个多项式函数$p(\cdot)$使得，对于所有$\mathcal{A}$接受的串$x$，都存在一个长度$\leq p(len(x))$的接受的计算，则称$\mathcal{A}${\bf 运行在多项式时间内}。
 
     一个非确定性算法可以被视为是一个这样的过程。每当需要在两个计算方向中做选择，他就制造两个自己的复制品，然后两个复制品各自继续一个计算方向。像这样连续分裂可能导致复制品个数按指数级增长。有任何一个复制品接受了输入，则认为输入被这个算法接受。
 
@@ -227,7 +228,7 @@ bottom=3cm}
     集合$\mathcal{NP}$非常庞大。不严格的讲，一个判定问题属于$\mathcal{NP}$当且仅当它可以被回溯搜索在多项式深度内解决。有很多重要的计算问题现在还无法证明属于$\mathcal{P}$，但是它们都明显属于$\mathcal{NP}$。比如着色问题————判断一个图中的节点被$k$种颜色着色后，是否能够使得相邻的节点都具有不同的颜色。一个非确定性的算法可以简单的猜一个颜色分配，然后在多项式时间内验证是否所有的相邻节点都有不同的颜色。
 
     考虑到$\mathcal{NP}$的范围如此之大，下面这个Cook提出的定理就非常有意义了。我们定义可满足性问题（简称SAT）如下：\\
-    {\bf可满足性问题（SATISFIABILITY）}\\
+    {\bf 可满足性问题（SATISFIABILITY）}\\
     输入：语句（Clause） $C_1,C_2,\cdots,C_p$\\
     性质：给定语句的合取是可满足的；即存在集合$S\subseteq\{x_1,x_2,\cdots,x_n,\bar{x_1},\bar{x_2},\cdots,\bar{x_n}\}$同时满足：\\
     \indent a) S不存在互补的文字（literal）\\
@@ -247,14 +248,14 @@ bottom=3cm}
       如果$SAT\in\mathcal{P}$，那么对于所有的$L\in\mathcal{NP},L\in\mathcal{P}$，因为$L \propto SAT$。如果$SAT\not\in\mathcal{P}$，因为$SAT\in\mathcal{NP}$，那么$\mathcal{P}\neq\mathcal{NP}$。
     \end{proof}
 
-    {\bf注意}，如果$\mathcal{P}=\mathcal{NP}$，那么$\mathcal{NP}$关于补运算和polynomial-pounded existential quantification是封闭的。因此它关于polynomial-bounded universal quantification也是封闭的。接下来，polynomial-bounded analogue of Kleene's Arithmetic Hierarchy[Rogers(1967)]就变得平凡了，如果$\mathcal{P}=\mathcal{NP}$。
+    {\bf 注意}，如果$\mathcal{P}=\mathcal{NP}$，那么$\mathcal{NP}$关于补运算和polynomial-pounded existential quantification是封闭的。因此它关于polynomial-bounded universal quantification也是封闭的。接下来，polynomial-bounded analogue of Kleene's Arithmetic Hierarchy[Rogers(1967)]就变得平凡了，如果$\mathcal{P}=\mathcal{NP}$。
 
     定理2表明，如果存在一个多项式时间算法可以判定$SAT$问题，那么所有可以被多项式深度回溯搜索解决的问题都可以被多项式时间算法解决。这是对$SAT\not\in\mathcal{P}$的强烈暗示。
 
 \section{完全问题}
     这篇论文的主要目标是找到一批和$SAT$问题有着相同地位的计算问题。这些问题可以被称为完全。
     \begin{definition}
-        语言$L$被称为({\bf多项式}){\bf完全}，当且仅当$L$同时满足：\\
+        语言$L$被称为({\bf 多项式}){\bf 完全}，当且仅当$L$同时满足：\\
         \indent a) $L\in\mathcal{NP}$\\
         \indent b) $SAT\propto L$\\
     \end{definition}
@@ -266,7 +267,7 @@ bottom=3cm}
     我们可以把完全的概念从定义在$\Sigma^*$上的语言扩展到定义在可数集上的问题。
 
     \begin{definition}
-        $D$是一个可数集，$e$是一个“标准”的一对一编码函数$e:D\rightarrow\Sigma^*$且$T$是$D$的一个子集。那么$T$是{\bf完全}的，当且仅当$e(T)$是完全的\footnote{此处原文为$e(D)$，应是笔误}。
+        $D$是一个可数集，$e$是一个“标准”的一对一编码函数$e:D\rightarrow\Sigma^*$且$T$是$D$的一个子集。那么$T$是{\bf 完全}的，当且仅当$e(T)$是完全的\footnote{此处原文为$e(D)$，应是笔误}。
     \end{definition}
 
     \begin{lemma}
@@ -277,81 +278,81 @@ bottom=3cm}
 
     本文的剩余部分主要进行了下面这个定理的证明。
 
-    {\bf主要定理}，以下列出的所有问题都是完全的。
+    {\bf 主要定理}，以下列出的所有问题都是完全的。
 
     \begin{enumerate}
-    \item {\bf可满足性问题(SATISFIABILITY)}\\
+    \item {\bf 可满足性问题(SATISFIABILITY)}\\
     注： 默认的，这个问题等价于判定一个析取范式是否是一个永真式。
 
-    \item {\bf0-1整数规划问题\\(0-1 INTEGER PROGRAMMING)}\\
+    \item {\bf 0-1整数规划问题\\(0-1 INTEGER PROGRAMMING)}\\
     输入：整数矩阵$C$和整数向量$d$\\
     性质：存在一个0-1向量$x$使得$Cx=d$
 
-    \item {\bf分团问题(CLIQUE)}\\
+    \item {\bf 分团问题(CLIQUE)}\\
     输入：图$G$，正整数$k$\\
     性质：存在$G$中$k$个互不相邻的节点组成的集合。
 
-    \item {\bf集合打包(SET PACKING)}\\
+    \item {\bf 集合打包(SET PACKING)}\\
     输入：一族集合$\{S_j\}$，正整数$\ell$\\
     性质：$\{S_j\}$包含$\ell$个互斥集合。
 
-    \item {\bf顶点覆盖(NODE COVER)}\\
+    \item {\bf 顶点覆盖(NODE COVER)}\\
     输入：图$G'$，正整数$\ell$\\
     性质：存在集合$R\subseteq N'$，使得$|R|\leq\ell$且每一条边都与$R$中的某个顶点相邻。
 
-    \item {\bf集合覆盖(SET COVERING)}\\
+    \item {\bf 集合覆盖(SET COVERING)}\\
     输入：有限集合组成的有限族$\{S_j\}$，正整数$k$\\
     性质：存在一个子族$\{T_h\}\subseteq\{S_j\}$包含小于等于$k$个集合使得$\bigcup T_h=\bigcup S_j$。
 
-    \item {\bf反馈顶点集(FEEDBACK NODE SET)}\\
+    \item {\bf 反馈顶点集(FEEDBACK NODE SET)}\\
     输入：有向图$H$，正整数$k$\\
     性质：存在一个集合$R\subseteq V$，使得$H$中的每个（有向）环包含一个$R$中的节点。
 
-    \item {\bf反馈边集(FEEDBACK ARC SET)}\\
+    \item {\bf 反馈边集(FEEDBACK ARC SET)}\\
     输入：有向图$H$，正整数$k$\\
     性质：存在一个集合$S\subseteq E$，使得$H$中的每个（有向）环包含一个$S$中的边。
 
-    \item {\bf有向汉密尔顿回路(DIRECTED HAMILTON CIRCUIT)}\\
+    \item {\bf 有向汉密尔顿回路(DIRECTED HAMILTON CIRCUIT)}\\
     输入：有向图$H$\\
     性质：$H$存在一个有向环，经过图中每个节点恰好一次。
 
-    \item {\bf无向汉密尔顿回路(UNDIRECTED HAMILTON CIRCUIT)}\\
+    \item {\bf 无向汉密尔顿回路(UNDIRECTED HAMILTON CIRCUIT)}\\
     输入：图$G$\\
     性质：$G$存在一个环，经过图中每个节点恰好一次。
 
-    \item {\bf3-可满足性问题\\(SATISFIABILITY WITH AT MOST 3 LITERALS PER CLAUSE)}\\
+    \item {\bf 3-可满足性问题\\(SATISFIABILITY WITH AT MOST 3 LITERALS PER CLAUSE)}\\
     输入：语句 $D_1,D_2,\cdots,D_r$，每个都最多包含3个文字(Literal)。\\
     性质：集合$\{D_1,D_2,\cdots,D_r\}$是可满足的
 
-    \item {\bf色数(CHROMATIC NUMBER)}\\
+    \item {\bf 色数(CHROMATIC NUMBER)}\\
     输入：图$G$，正整数$k$\\
     性质：存在一个函数$\Phi:N\rightarrow Z_k$，使得对任意相邻的顶点$u$和$v$，有$\Phi(u)\neq\Phi(v)$
 
-    \item {\bf分团覆盖(CLIQUE COVER)}\\
+    \item {\bf 分团覆盖(CLIQUE COVER)}\\
     输入：图$G'$，正整数$\ell$\\
     性质：$N'$是$\ell$个或更少的团的并。
 
-    \item {\bf精确覆盖(EXACT COVER)}\\
+    \item {\bf 精确覆盖(EXACT COVER)}\\
     输入：集合$\{u_i,i=1,2,\cdots,t\}$的子集组成的族${S_j}$\\
     性质：存在一个子族$\{T_h\}\subseteq\{S_j\}$，使得$T_h$两两互斥，且$\bigcup T_h=\bigcup S_j=\{u_i,i=1,2,\cdots,t\}$。
 
-    \item {\bf碰集(HITTING SET)}\\
+    \item {\bf 碰集(HITTING SET)}\\
     输入：集合$\{s_j,j=1,2,\cdots,t\}$的子集组成的族${U_i}$\\
     性质：存在一个集合$W$，使得对于所有$i$，$|W\cap U_i|=1$
 
-    \item {\bf斯坦纳树(STEINER TREE)}\\
+    \item {\bf 斯坦纳树(STEINER TREE)}\\
     输入：图$G$，$R\subseteq N$，权重函数$w:A\rightarrow Z$，正整数$k$\\
     性质：G有一个权重小于等于$k$的子树，包含所有$R$中的节点
 
-    \item {\bf三维匹配(3-DIMENSIONAL MATCHING)}\\
+    \item {\bf 三维匹配(3-DIMENSIONAL MATCHING)}\\
     输入：集合$U\subseteq T\times T\times T$，其中$T$是一个有限集\\
     性质：存在一个集合$W\subseteq U$，使得$|W|=|T|$，且$W$中任意两个元素在任意一个维度上的值都不相同。
 
-    \item {\bf背包(KNAPSACK)}\\
+    \item {\bf 背包(KNAPSACK)}\\
     输入：$(a_1,a_2,\cdots,a_r,b)\in Z^{n+1}$(\\
     性质：$\sum a_j x_j=b$有0-1解
 
-    \item {\bf工作排序(JOB SEQUENCING)}\\
+    \item {\bf 工作排序(JOB SEQUENCING)}\\
     输入：“执行时间向量” $(T_1,\cdots,T_p)\in Z^p$\\
     \hphantom{输入：}“结束期限向量” $(D_1,\cdots,D_p)\in Z^p$\\
     \hphantom{输入：}“惩罚向量” $(P_1,\cdots,P_p)\in Z^p$\\
@@ -364,12 +365,12 @@ bottom=3cm}
         \end{aligned}
     \end{equation}
 
-    \item {\bf集合划分(PARTITION)}\\
+    \item {\bf 集合划分(PARTITION)}\\
     输入：$(c_1,c_2,\cdots,c_s)\in Z^s$\\
     性质：存在一个集合$I\subseteq\{1,2,\cdots,s\}$使得：
     $$\sum_{h\in I}c_h = \sum_{h\notin I}c_h$$
 
-    \item {\bf最大割}\\
+    \item {\bf 最大割}\\
     输入：图$G$，权重函数$w:A\rightarrow Z$，正整数$W$\\
     性质：存在一个集合$S\subseteq N$，使得：
     $$\sum_{\substack{\{u,v\}\in A \\ u\in S \\ v\notin S}} w(\{u,v\})\ge W$$
@@ -386,7 +387,7 @@ bottom=3cm}
 
     为了展示从集合$T\subseteq D$到集合$T'\subseteq D'$的规约。我们需要找到满足引理2的函数$F:D\rightarrow D'$。对于接下来我们给出的每个规约，读者可以很容的验证他们满足那些条件。
     \begin{itemize}
-    \item {\bf可满足性问题（SAT）$\propto$ 0-1整数规划}
+    \item {\bf 可满足性问题（SAT）$\propto$ 0-1整数规划}
         \begin{equation}\nonumber % Remove numbering (before each equation)
         \begin{aligned}
             &c_{ij}=\left\{
@@ -406,7 +407,7 @@ bottom=3cm}
         \end{aligned}
         \end{equation}
 
-    \item {\bf可满足性问题 $\propto$ 分团问题}
+    \item {\bf 可满足性问题 $\propto$ 分团问题}
         \begin{equation}\nonumber % Remove numbering (before each equation)
         \begin{aligned}
         & N = \{<\sigma,i>|\sigma\text{是}C_i\text{中出现的文字(Literal)}\} \\
@@ -415,7 +416,7 @@ bottom=3cm}
         \end{aligned}
         \end{equation}
 
-    \item {\bf分团问题 $\propto$ 集合打包}
+    \item {\bf 分团问题 $\propto$ 集合打包}
         假设$N=\{1,2,\cdots,n\}$。集合$S_1,S_2,\cdots,S_n$中的元素是那些不在$A$中的节点二元集$\{i,j\}$。
         \begin{equation}\nonumber % Remove numbering (before each equation)
         \begin{aligned}
@@ -424,7 +425,7 @@ bottom=3cm}
         \end{aligned}
         \end{equation}
 
-    \item {\bf分团问题 $\propto$ 顶点覆盖}
+    \item {\bf 分团问题 $\propto$ 顶点覆盖}
         \begin{equation}\nonumber % Remove numbering (before each equation)
         \begin{aligned}
         & G' \text{是}G\text{补图}\\
@@ -432,11 +433,11 @@ bottom=3cm}
         \end{aligned}
         \end{equation}
 
-    \item {\bf顶点覆盖 $\propto$ 集合覆盖}\\
+    \item {\bf 顶点覆盖 $\propto$ 集合覆盖}\\
 
         假设$N'=\{1,2,\cdots,n\}$。则（集合覆盖问题中的集合的）元素为$G'$中的边。$S_j$是节点$j$的临边组成的集合。最后，$k=\ell$。
 
-    \item {\bf顶点覆盖 $\propto$ 反馈顶点集}
+    \item {\bf 顶点覆盖 $\propto$ 反馈顶点集}
         \begin{equation}\nonumber % Remove numbering (before each equation)
         \begin{aligned}
         & V=N'
@@ -445,7 +446,7 @@ bottom=3cm}
         \end{aligned}
         \end{equation}
 
-    \item {\bf顶点覆盖 $\propto$ 反馈边集}
+    \item {\bf 顶点覆盖 $\propto$ 反馈边集}
         \begin{equation}\nonumber % Remove numbering (before each equation)
         \begin{aligned}
         V=&N'\times\{0,1\}\\
@@ -455,7 +456,7 @@ bottom=3cm}
         \end{aligned}
         \end{equation}
 
-    \item {\bf顶点覆盖 $\propto$ 有向汉密尔顿回路}\\
+    \item {\bf 顶点覆盖 $\propto$ 有向汉密尔顿回路}\\
         不失一般性的，我们假设$A'=Z_m$。
         \begin{equation}\nonumber % Remove numbering (before each equation)
         \begin{aligned}
@@ -473,7 +474,7 @@ bottom=3cm}
         \end{aligned}
         \end{equation}
 
-    \item {\bf有向汉密尔顿回路 $\propto$ 无向汉密尔顿回路}
+    \item {\bf 有向汉密尔顿回路 $\propto$ 无向汉密尔顿回路}
         \begin{equation}\nonumber % Remove numbering (before each equation)
         \begin{aligned}
         N=  &V\times{0,1,2}\\
@@ -482,13 +483,13 @@ bottom=3cm}
         \end{aligned}
         \end{equation}
 
-    \item {\bf可满足性问题 $\propto$ 3-可满足性问题}\\
+    \item {\bf 可满足性问题 $\propto$ 3-可满足性问题}\\
         把每个满足$\sigma_i$是文字且$m>3$的语句$\sigma_1\cup\sigma_2\cup\cdots\cup\sigma_m$替换为：
         $$(\sigma_1\cup\sigma_2\cup u_1) (\sigma3\cup\cdots\cup\sigma_m\cup\bar{u}_1)
         (\bar{\sigma}_3\cup u_1) \cdots(\bar{\sigma}_m\cup u_1)$$
         其中$u_1$是一个新的变量。重复这个变换直到没有语句有多于三个的文字。
 
-    \item {\bf3-可满足性问题 $\propto$ 色数}\\
+    \item {\bf 3-可满足性问题 $\propto$ 色数}\\
         不失一般性的，我们假设$m>4$。
         \begin{equation}\nonumber % Remove numbering (before each equation)
         \begin{aligned}
@@ -503,7 +504,7 @@ bottom=3cm}
         \end{aligned}
         \end{equation}
 
-    \item {\bf色数 $\propto$ 分团覆盖}
+    \item {\bf 色数 $\propto$ 分团覆盖}
         \begin{equation}\nonumber % Remove numbering (before each equation)
         \begin{aligned}
         & G'\text{是}G\text{的补图}\\
@@ -511,7 +512,7 @@ bottom=3cm}
         \end{aligned}
         \end{equation}
 
-    \item {\bf色数 $\propto$ 精确覆盖}\\
+    \item {\bf 色数 $\propto$ 精确覆盖}\\
         精确覆盖问题中的集合为
         $$N\cup A\cup\{<u,e,f>|u\text{与}e\text{连接且}1\leq f \leq k\}$$
         族$\{S_j\}$构造如下：\\
@@ -527,10 +528,10 @@ bottom=3cm}
         \end{equation}
         其余集合都不属于$\{S_j\}$。
 
-    \item {\bf精确覆盖 $\propto$ 碰集}\\
+    \item {\bf 精确覆盖 $\propto$ 碰集}\\
         碰集有集合$U_i$和元素$s_j$，使得$s_j\in U_i\Leftrightarrow u_i\in S_j$。
 
-    \item {\bf精确覆盖 $\propto$ 斯坦纳树}
+    \item {\bf 精确覆盖 $\propto$ 斯坦纳树}
         \begin{equation}\nonumber % Remove numbering (before each equation)
         \begin{aligned}
         &N=\{n_o\}\cup\{S_j\}\cup\{u_i\}\\
@@ -542,7 +543,7 @@ bottom=3cm}
         \end{aligned}
         \end{equation}
 
-    \item {\bf精确覆盖 $\propto$ 3维匹配}\\
+    \item {\bf 精确覆盖 $\propto$ 3维匹配}\\
         不失一般性的，我们假设$|S_j|>2$对于所有$j$。令$T=\{<i,j>|u_i\in S_j\}$。令$\alpha$是任意一个从$\{u_i\}$到$T$的一对一函数。令$\pi:T\rightarrow T$是一个置换，使得对每一个固定的j，$\{<i,j>|u_i\in S_j\}$是$\pi$的周期。
         \begin{equation}\nonumber % Remove numbering (before each equation)
         \begin{aligned}
@@ -551,7 +552,7 @@ bottom=3cm}
         \end{aligned}
         \end{equation}
 
-    \item {\bf精确覆盖 $\propto$ 背包问题}\\
+    \item {\bf 精确覆盖 $\propto$ 背包问题}\\
         令$d=|\{S_j\}|+1$。令$\epsilon_{ji}=
         \left\{\begin{matrix}
             1 & \text{如果}u_i\in S_j \\
@@ -565,10 +566,10 @@ bottom=3cm}
         \end{aligned}
         \end{equation}
 
-    \item {\bf背包问题 $\propto$ 工作排序}
+    \item {\bf 背包问题 $\propto$ 工作排序}
         $$p=r, T_i=P_i=a_i, D_i=b.$$
 
-    \item {\bf背包问题 $\propto$ 集合划分}
+    \item {\bf 背包问题 $\propto$ 集合划分}
         \begin{equation}\nonumber % Remove numbering (before each equation)
         \begin{aligned}
         &s=r+2\\
@@ -578,7 +579,7 @@ bottom=3cm}
         \end{aligned}
         \end{equation}
 
-    \item {\bf集合划分 $\propto$ 最大割}
+    \item {\bf 集合划分 $\propto$ 最大割}
         \begin{equation}\nonumber % Remove numbering (before each equation)
         \begin{aligned}
         &N=\{1,2,\cdots,s\}\\
@@ -596,15 +597,15 @@ bottom=3cm}
 
     下面我们列出自动机理论和语言理论中的三个问题。每个完全问题都可以规约到这三个问题。但是这三个问题却不能确定是$\mathcal{NP}$的，他们是否属于$\mathcal{NP}$至今仍是个谜。不熟悉自动机和语言理论的读者可以在Hopcroft和ULLman(1969)的论文中找到必要的定义。
     \begin{itemize}
-      \item {\bf正则语言的等价性}\\
+      \item {\bf 正则语言的等价性}\\
       输入：在字母表\{0,1\}上的两个正则表达式\\
       性质：这两个正则表达式定义了相同的语言
 
-      \item {\bf非确定性有限自动机等价性}\\
+      \item {\bf 非确定性有限自动机等价性}\\
           输入：输入字母表为\{0,1\}的一对非确定有限自动机\\
           性质：这两个自动机定义了相同的语言
 
-      \item {\bf上下文相关判定}\\
+      \item {\bf 上下文相关判定}\\
       输入：一个上下文相关文法$\Lambda$和串$x$\\
       性质：$x$属于$\Lambda$定义的语言
     \end{itemize}
@@ -642,15 +643,15 @@ bottom=3cm}
 
     最后，我们列出一些现在还不能确定是完全问题的$\mathcal{NP}$问题。
     \begin{itemize}
-      \item {\bf图的同构性}\\
+      \item {\bf 图的同构性}\\
       输入：图$G$和$G'$\\
       性质：$G$与$G'$同构
 
-      \item {\bf非质数}\\
+      \item {\bf 非质数}\\
           输入：正整数$k$\\
           性质：$k$是合数
 
-      \item {\bf线性不等式组}\\
+      \item {\bf 线性不等式组}\\
       输入：整数矩阵$C$，整数向量$d$\\
       性质：$Cx>d$有有理数解
     \end{itemize}
@@ -658,7 +659,7 @@ bottom=3cm}
     \begin{appendices}
       \section{附录\\
       问题中使用的符号与术语}
-      \noindent命题演算
+      \noindent 命题演算
       \begin{equation}\nonumber
       \begin{aligned}
         &x_1,x_2,\cdots,x_n \qquad u_1,u_2,\cdots,u_m & \text{逻辑变量}\\
@@ -670,8 +671,8 @@ bottom=3cm}
       \end{aligned}
       \end{equation}
       一个语句中不会出现互补文字\\
-      
-      \noindent标量、向量、矩阵
+
+      \noindent 标量、向量、矩阵
       \begin{equation}\nonumber
       \begin{aligned}
         &Z& \text{正整数集}\\
@@ -684,8 +685,8 @@ bottom=3cm}
       \end{aligned}
       \end{equation}
       \\
-      
-      \noindent图和有向图
+
+      \noindent 图和有向图
       \begin{equation}\nonumber
       \begin{aligned}
       &G=(N,A) G'=(N',A') \qquad \text{有限图}\\
@@ -699,8 +700,8 @@ bottom=3cm}
       \end{aligned}
       \end{equation}
       \\
-      
-      \noindent集合
+
+      \noindent 集合
       \begin{equation}\nonumber
       \begin{aligned}
       &\Phi& \text{空集} \\
@@ -717,5 +718,5 @@ bottom=3cm}
 
 
 
-\end{CJK}
-\end{document} 
+% \end{CJK}
+\end{document}
